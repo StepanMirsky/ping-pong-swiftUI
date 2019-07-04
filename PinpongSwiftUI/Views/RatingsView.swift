@@ -8,6 +8,12 @@
 
 import SwiftUI
 
+struct RatingViewModel {
+    let playerName: String
+    let ratingValue: Int
+    
+}
+
 struct RatingsView : View {
     var body: some View {
         Text("Ratings")
