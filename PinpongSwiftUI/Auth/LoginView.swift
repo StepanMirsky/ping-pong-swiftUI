@@ -15,22 +15,29 @@ struct LoginView : View {
     var body: some View {
         VStack {
             Text("Введите логин")
+                .font(.system(.subheadline, design: .rounded))
                 .navigationBarTitle("Войдите")
             TextField("", text: $login)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, 16)
             Text("Введите пароль")
+                .font(.system(.subheadline, design: .rounded))
             SecureField("", text: $password)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal,16)
             HStack {
                 Button("Войти") {
                     self.signin()
-                }.padding(16)
+                }
+                    .padding(16)
+                    .font(.system(.headline, design: .rounded))
+                
                 NavigationLink(destination: RegistrationView()) {
                     Text("Зарегистрироваться")
                         .color(.blue)
-                }.padding(16)
+                        .font(.system(.headline, design: .rounded))
+                }
+                    .padding(16)
             }
         }
     }

@@ -21,31 +21,34 @@ struct RegistrationView : View {
 
     var body: some View {
         VStack {
-            Text("Войдите")
-                .padding(16)
-                .navigationBarTitle("Зарегистрируйтесь")
             Text("Введите логин: ")
+                .font(.system(.subheadline, design: .rounded))
+                .navigationBarTitle("Зарегистрируйтесь")
             TextField("", text: $login)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal, 16)
             Text("Введите пароль: ")
+                .font(.system(.subheadline, design: .rounded))
             SecureField("", text: $password)
                 .textFieldStyle(.roundedBorder)
-                .padding(.horizontal,16)
+                .padding(.horizontal, 16)
             Text("Повторите пароль: ")
+                .font(.system(.subheadline, design: .rounded))
             SecureField("", text: $passwordConfirm)
                 .textFieldStyle(.roundedBorder)
-                .padding(.horizontal,16)
+                .padding(.horizontal, 16)
             if passwordsMatch == .notEqual {
                 Text("Пароли не совпадают")
+                    .font(.system(.subheadline, design: .rounded))
                     .foregroundColor(.red)
-                    .padding(.horizontal,16)
+                    .padding(.horizontal, 16)
             }
             Button("Зарегистрироваться") {
                 self.register()
             }
                 .padding(16)
                 .disabled(passwordsMatch != .equal)
+                .font(.system(.headline, design: .rounded))
         }
     }
 
