@@ -77,7 +77,7 @@ struct GameView : View {
                 Divider()
                 Spacer()
                 PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
-            }
+            }.navigationBarTitle("Игра")
             Divider()
             ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
             Divider()
@@ -90,7 +90,7 @@ struct GameView : View {
             } else {
                 HStack {
                     Button(action: {
-                        self.game.homeScore += 1
+                        self.addScore(to: true)
                     }) {
                         Image("defaultImage")
                             .frame(width: 150, height: 150)
@@ -99,7 +99,7 @@ struct GameView : View {
                     }.padding(16)
                     Divider()
                     Button(action: {
-                        self.game.awayScore += 1
+                        self.addScore(to: false)
                     }) {
                         Image("defaultImage")
                             .frame(width: 150, height: 150)
@@ -109,6 +109,24 @@ struct GameView : View {
                 }
             }
             Spacer()
+        }
+    }
+
+    func addScore(to isHome: Bool) {
+        if isHome {
+            game.homeScore += 1
+        } else {
+            game.awayScore += 1
+        }
+        endGameIfNeeded()
+    }
+
+    func endGameIfNeeded() {
+        if game.homeScore >= 11 && game.homeScore > game.awayScore && game.homeScore - game.awayScore >= 2 {
+            game.isFinished = true
+        }
+        if game.awayScore >= 11 && game.awayScore > game.homeScore && game.awayScore - game.homeScore >= 2 {
+            game.isFinished = true
         }
     }
 }
