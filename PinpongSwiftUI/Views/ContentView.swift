@@ -25,7 +25,9 @@ struct ContentView : View {
                     Text("Games")
                 }
             }.tag(1)
-            ProfileView().tabItem {
+            NavigationView {
+                ProfileView()
+            }.tabItem {
                 VStack {
                     Image("profile")
                     Text("Profile")

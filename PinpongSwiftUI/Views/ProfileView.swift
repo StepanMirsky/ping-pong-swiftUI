@@ -10,27 +10,27 @@ import SwiftUI
 
 struct User {
     let name: String
+    let rating: Int
     let image: URL?
 }
 
 struct ProfileView : View {
-    var user: User = User.init(name: "Sergey", image: nil)
+    var user: User = User.init(name: "Sergey", rating: 1000, image: nil)
     
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack.init(alignment: .center, spacing: 0) {
-                    Image("defaultImage")
-                        .frame(width: 300, height: 300)
-                        .aspectRatio(contentMode: .fill)
-                        
-                        .clipShape(Circle())
-                    Text(user.name)
-                        .fontWeight(.heavy)
-                        .font(Font.system(size: 30, design: .rounded))
-                }
+        ScrollView {
+            VStack(alignment: .center, spacing: 20) {
+                Image("defaultImage")
+                    .frame(width: 300, height: 300)
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(Circle())
+                    .gesture(TapGesture.init())
+                Text(user.name)
+                    .font(Font.system(size: 25, design: .rounded))
+                Text("\(user.rating)")
+                    .font(Font.system(size: 25, design: .rounded))
             }
-            .navigationBarTitle("Профиль")
         }
     }
+    
 }
