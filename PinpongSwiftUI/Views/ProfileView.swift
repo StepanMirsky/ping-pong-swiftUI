@@ -17,7 +17,9 @@ struct User {
 struct ProfileView : View {
     var user: User = User.init(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
     var isMe: Bool
-    
+    var homeUser: User {
+        return User(name: "Это я", rating: 1000, image: UIImage(named: "defaultImage")!)
+    }
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
@@ -36,10 +38,16 @@ struct ProfileView : View {
                 }
                 
                 Text(user.name)
-                    .font(Font.system(size: 25, design: .rounded))
+                    .font(Font.system(.largeTitle, design: .rounded))
                 Text("\(user.rating)")
-                    .color(.ratingColor(user.rating))
-                    .font(Font.system(size: 25, design: .rounded))
+                    .color(Color.ratingColor(user.rating))
+                    .font(Font.system(.title, design: .rounded))
+                if !isMe {
+                    NavigationLink(destination: GameView(game: Game(homeUser: homeUser, awayUser: user, homeScore: 0, awayScore: 0, isFinished: false))) {
+                        Text("Вызвать")
+                            .font(.system(.headline, design: .rounded))
+                    }
+                }
             }
         }
     }

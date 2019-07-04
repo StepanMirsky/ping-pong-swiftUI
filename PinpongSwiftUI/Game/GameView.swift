@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-struct Game {
+struct Game: Identifiable {
+    let id = UUID()
     let homeUser: User
     let awayUser: User
     var homeScore: UInt
@@ -32,8 +33,11 @@ struct PlayerView : View {
                 .frame(width: 125, height: 125)
                 .aspectRatio(contentMode: .fill)
                 .clipShape(Circle())
-            Text(user.name).font(.system(size: 24))
+            Text(user.name)
+                    .font(.system(.title, design: .rounded))
             Text(String(user.rating))
+                .font(.system(.headline, design: .rounded))
+                .color(.ratingColor(user.rating))
         }
     }
 }
@@ -74,19 +78,20 @@ struct GameView : View {
                 Divider()
                 Spacer()
                 PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
-            }
+            }.navigationBarTitle("Игра")
             Divider()
             ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
             Divider()
             if game.isFinished {
                 VStack {
                     Text("Победитель")
+                        .font(.system(.largeTitle, design: .rounded))
                     PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
                 }
             } else {
                 HStack {
                     Button(action: {
-                        self.game.homeScore += 1
+                        self.addScore(to: true)
                     }) {
                         Image("defaultImage")
                             .frame(width: 150, height: 150)
@@ -95,7 +100,7 @@ struct GameView : View {
                     }.padding(16)
                     Divider()
                     Button(action: {
-                        self.game.awayScore += 1
+                        self.addScore(to: false)
                     }) {
                         Image("defaultImage")
                             .frame(width: 150, height: 150)
@@ -105,6 +110,24 @@ struct GameView : View {
                 }
             }
             Spacer()
+        }
+    }
+
+    func addScore(to isHome: Bool) {
+        if isHome {
+            game.homeScore += 1
+        } else {
+            game.awayScore += 1
+        }
+        endGameIfNeeded()
+    }
+
+    func endGameIfNeeded() {
+        if game.homeScore >= 11 && game.homeScore > game.awayScore && game.homeScore - game.awayScore >= 2 {
+            game.isFinished = true
+        }
+        if game.awayScore >= 11 && game.awayScore > game.homeScore && game.awayScore - game.homeScore >= 2 {
+            game.isFinished = true
         }
     }
 }

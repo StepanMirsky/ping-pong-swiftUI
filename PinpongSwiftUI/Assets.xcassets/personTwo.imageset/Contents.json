@@ -2,16 +2,7 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Снимок экрана 2019-07-04 в 16.44.35.png",
-      "scale" : "1x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Снимок экрана 2019-07-04 в 16.44.35.png"
     }
   ],
   "info" : {
