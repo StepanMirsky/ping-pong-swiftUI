@@ -16,15 +16,25 @@ struct User {
 
 struct ProfileView : View {
     var user: User = User.init(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
+    var isMe: Bool
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
-                Image(uiImage: user.image)
-                    .frame(width: 300, height: 300)
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(Circle())
-                    .gesture(TapGesture.init())
+                if isMe {
+                    PresentationLink(destination: RegistrationView()) {
+                        Image(uiImage: user.image)
+                            .frame(width: 300, height: 300)
+                            .aspectRatio(contentMode: .fill)
+                            .clipShape(Circle())
+                    }
+                } else {
+                    Image(uiImage: user.image)
+                        .frame(width: 300, height: 300)
+                        .aspectRatio(contentMode: .fill)
+                        .clipShape(Circle())
+                }
+                
                 Text(user.name)
                     .font(Font.system(size: 25, design: .rounded))
                 Text("\(user.rating)")
@@ -32,5 +42,4 @@ struct ProfileView : View {
             }
         }
     }
-    
 }

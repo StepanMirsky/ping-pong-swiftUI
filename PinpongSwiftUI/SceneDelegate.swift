@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let gamesController = UINavigationController(rootViewController: UIHostingController(rootView: GamesView()))
             gamesController.navigationBar.prefersLargeTitles = true
             gamesController.title = "Игры"
-            let profileController = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView()))
+            let profileController = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView(isMe: true)))
             profileController.navigationBar.prefersLargeTitles = true
             profileController.title = "Профиль"
             let tabbarController = UITabBarController()
