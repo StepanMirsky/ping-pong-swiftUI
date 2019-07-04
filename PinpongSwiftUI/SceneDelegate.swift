@@ -22,7 +22,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView())
+
+            let ratingsController = UIHostingController(rootView: RatingsView())
+            ratingsController.title = "Ratings"
+            let gamesController = UIHostingController(rootView: GamesView())
+            gamesController.title = "Games"
+            let profileController = UIHostingController(rootView: ProfileView())
+            profileController.title = "Profile"
+            
+            let tabBarController = UITabBarController()
+            tabBarController.setViewControllers(
+                [ratingsController, gamesController, profileController],
+                animated: false
+            )
+            
+            window.rootViewController = tabBarController
             self.window = window
             window.makeKeyAndVisible()
         }
