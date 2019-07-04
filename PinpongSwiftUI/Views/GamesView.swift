@@ -8,24 +8,6 @@
 
 import SwiftUI
 
-struct GameHistory: Identifiable, Hashable {
-    var id = UUID()
-    
-    var personOne: String
-    var personTwo: String
-    var personOneScore: String
-    var personTwoScore: String
-    var personOneImageUrl: String
-    var personTwoImageUrl: String
-    var personOneIsWinner: Bool {
-        return personOneScore > personTwoScore
-    }
-    var personTwoIsWinner: Bool {
-        return !personOneIsWinner
-    }
-    
-}
-
 struct HistoryRow: View {
     let game: Game
     var body: some View {
@@ -44,22 +26,25 @@ struct HistoryRow: View {
 struct GamesView : View {
     @State var arr = [
         Game(
-            homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!),
-            awayUser: User(name: "Серега", rating: 100, image: UIImage(named: "personTwo")!),
-            homeScore: 11,
-            awayScore: 9
+            homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!),
+            homeScore: 1,
+            awayScore: 6,
+            isFinished: true
         ),
         Game(
             homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!),
             awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!),
             homeScore: 1,
-            awayScore: 11
+            awayScore: 11,
+            isFinished: true
         ),
         Game(
             homeUser: User(name: "Степан", rating: 100, image: UIImage(named: "personOne")!),
             awayUser: User(name: "Виталий", rating: 100, image: UIImage(named: "personTwo")!),
             homeScore: 11,
-            awayScore: 9
+            awayScore: 9,
+            isFinished: true
         )
     ]
     
