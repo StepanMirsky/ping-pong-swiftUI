@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2831E1CB22CDFA3700CB7415 /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1C822CDFA3700CB7415 /* RatingsView.swift */; };
 		2831E1CC22CDFA3700CB7415 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1C922CDFA3700CB7415 /* ProfileView.swift */; };
 		2831E1CD22CDFA3700CB7415 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1CA22CDFA3700CB7415 /* GamesView.swift */; };
 		2831E1CF22CDFA8100CB7415 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2831E1CE22CDFA8100CB7415 /* Preview Assets.xcassets */; };
 		2831E1D322CE001200CB7415 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1D222CE001200CB7415 /* ContentView.swift */; };
+		284E10BE22CE3356006E10CB /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E10BC22CE3356006E10CB /* RatingsView.swift */; };
+		284E10BF22CE3356006E10CB /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284E10BD22CE3356006E10CB /* RatingRow.swift */; };
 		54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD022CDF5D8005F4C88 /* LoginView.swift */; };
 		54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD122CDF5D8005F4C88 /* RegistrationView.swift */; };
 		6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF722CDE54100DE4E5D /* AppDelegate.swift */; };
@@ -22,11 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2831E1C822CDFA3700CB7415 /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
 		2831E1C922CDFA3700CB7415 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		2831E1CA22CDFA3700CB7415 /* GamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		2831E1CE22CDFA8100CB7415 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2831E1D222CE001200CB7415 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		284E10BC22CE3356006E10CB /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
+		284E10BD22CE3356006E10CB /* RatingRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingRow.swift; sourceTree = "<group>"; };
 		54487AD022CDF5D8005F4C88 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		54487AD122CDF5D8005F4C88 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinpongSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,12 +54,20 @@
 		2831E1C722CDFA3700CB7415 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2831E1C822CDFA3700CB7415 /* RatingsView.swift */,
 				2831E1C922CDFA3700CB7415 /* ProfileView.swift */,
 				2831E1CA22CDFA3700CB7415 /* GamesView.swift */,
 				2831E1D222CE001200CB7415 /* ContentView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		284E10BB22CE3356006E10CB /* Ratings */ = {
+			isa = PBXGroup;
+			children = (
+				284E10BC22CE3356006E10CB /* RatingsView.swift */,
+				284E10BD22CE3356006E10CB /* RatingRow.swift */,
+			);
+			path = Ratings;
 			sourceTree = "<group>";
 		};
 		54487ACB22CDF5A9005F4C88 /* Auth */ = {
@@ -88,6 +98,7 @@
 		6A114CF622CDE54100DE4E5D /* PinpongSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				284E10BB22CE3356006E10CB /* Ratings */,
 				54487ACB22CDF5A9005F4C88 /* Auth */,
 				2831E1C722CDFA3700CB7415 /* Views */,
 				6A114CF722CDE54100DE4E5D /* AppDelegate.swift */,
@@ -187,12 +198,13 @@
 			files = (
 				2831E1CD22CDFA3700CB7415 /* GamesView.swift in Sources */,
 				6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */,
+				284E10BF22CE3356006E10CB /* RatingRow.swift in Sources */,
 				2831E1D322CE001200CB7415 /* ContentView.swift in Sources */,
 				6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */,
 				54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */,
 				54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */,
 				2831E1CC22CDFA3700CB7415 /* ProfileView.swift in Sources */,
-				2831E1CB22CDFA3700CB7415 /* RatingsView.swift in Sources */,
+				284E10BE22CE3356006E10CB /* RatingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

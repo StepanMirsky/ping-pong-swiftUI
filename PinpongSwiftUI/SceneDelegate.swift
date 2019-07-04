@@ -17,7 +17,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: ContentView())
+            let ratingsController = UINavigationController(rootViewController: UIHostingController(rootView: RatingsView()))
+            ratingsController.title = "Рейтинг"
+            let gamesController = UINavigationController(rootViewController: UIHostingController(rootView: GamesView()))
+            gamesController.title = "Игры"
+            let profileController = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView()))
+            profileController.title = "Профиль"
+            let tabbarController = UITabBarController()
+            
+            tabbarController.setViewControllers(
+                [ratingsController, gamesController, profileController],
+                animated: false
+            )
+            
+            window.rootViewController = tabbarController
             self.window = window
             window.makeKeyAndVisible()
         }
