@@ -35,14 +35,16 @@ struct RatingRow : View {
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))
                 .shadow(radius: 10)
             VStack(alignment: .leading) {
-                Text(user.name)
-                    .color(.black)
-                    .font(Font.system(.headline, design: .rounded))
+                HStack {
+                    Text(user.name)
+                        .color(.black)
+                        .font(Font.system(.headline, design: .rounded))
+                    LastGamesView(lastGames: user.lastGames)
+                }
                 Text(String(user.rating))
                     .color(.ratingColor(user.rating))
                     .font(Font.system(.subheadline, design: .rounded))
             }
-            LastGamesView(lastGames: user.lastGames)
         }
     }
 }

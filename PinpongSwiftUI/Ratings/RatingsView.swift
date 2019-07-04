@@ -35,55 +35,7 @@ struct RatingsList: View {
 }
 
 struct RatingsView : View {
-    var users = [
-        User(
-            name: "Серега",
-            rating: 500,
-            image: UIImage(named: "defaultImage")!,
-            lastGames: [
-                ShortGame(isWin: true),
-                ShortGame(isWin: false),
-                ShortGame(isWin: false)
-            ]
-        ),
-        User(
-            name: "Федя",
-            rating: 1000,
-            image: UIImage(named: "personOne")!,
-            lastGames: [
-                ShortGame(isWin: true),
-                ShortGame(isWin: false),
-                ShortGame(isWin: false),
-                ShortGame(isWin: true),
-                ShortGame(isWin: true)
-            ]
-        ),
-        User(
-            name: "Антон",
-            rating: 1500,
-            image: UIImage(named: "defaultImage")!,
-            lastGames: [
-                ShortGame(isWin: true),
-                ShortGame(isWin: true),
-                ShortGame(isWin: false),
-                ShortGame(isWin: true)
-            ]
-        ),
-        User(
-            name: "Вика",
-            rating: 800,
-            image: UIImage(named: "personTwo")!,
-            lastGames: [
-                ShortGame(isWin: true),
-                ShortGame(isWin: false)            ]
-        ),
-        User(
-            name: "Гриша",
-            rating: 450,
-            image: UIImage(named: "defaultImage")!,
-            lastGames: []
-        )
-    ]
+    var users = Storage.shared.users
     
     var body: some View {
         RatingsList(users: users)
