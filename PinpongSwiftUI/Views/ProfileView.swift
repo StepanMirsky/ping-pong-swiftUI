@@ -8,18 +8,31 @@
 
 import SwiftUI
 
-struct User {
-    let name: String
-    let rating: Int
-    let image: UIImage
-}
-
 struct ProfileView : View {
-    var user: User = User(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
+    var user: User = User(
+        name: "Sergey",
+        rating: 1000,
+        image: UIImage(named: "defaultImage")!,
+        lastGames: [
+            ShortGame(isWin: false),
+            ShortGame(isWin: true)
+        ]
+    )
+
     var isMe: Bool
+
     var homeUser: User {
-        return User(name: "Это я", rating: 1000, image: UIImage(named: "defaultImage")!)
+        return User(
+            name: "Это я",
+            rating: 1000,
+            image: UIImage(named: "defaultImage")!,
+            lastGames: [
+                ShortGame(isWin: false),
+                ShortGame(isWin: true)
+            ]
+        )
     }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
@@ -40,7 +53,8 @@ struct ProfileView : View {
                     .font(Font.system(.largeTitle, design: .rounded))
                 Text("\(user.rating)")
                     .color(Color.ratingColor(user.rating))
-                    .font(Font.system(.title, design: .rounded))
+                    .font(Font.system(.headline, design: .rounded))
+                LastGamesView(lastGames: user.lastGames)
                 if !isMe {
                     NavigationLink(destination: GameView(game: Game(homeUser: homeUser, awayUser: user, homeScore: 0, awayScore: 0, isFinished: false))) {
                         Text("Вызвать")
