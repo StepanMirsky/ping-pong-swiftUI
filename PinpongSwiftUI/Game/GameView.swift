@@ -14,6 +14,7 @@ struct Game: Identifiable {
     let awayUser: User
     var homeScore: UInt
     var awayScore: UInt
+    var isFinished: Bool
     var homeIsWinner: Bool {
         return homeScore > awayScore
     }
@@ -28,12 +29,15 @@ struct PlayerView : View {
 
     var body: some View {
         VStack(alignment: textAlignment) {
-            Image("defaultImage")
+            Image(uiImage: user.image)
                 .frame(width: 125, height: 125)
                 .aspectRatio(contentMode: .fill)
                 .clipShape(Circle())
-            Text(user.name).font(.system(size: 24))
+            Text(user.name)
+                    .font(.system(.title, design: .rounded))
             Text(String(user.rating))
+                .font(.system(.headline, design: .rounded))
+                .color(.ratingColor(user.rating))
         }
     }
 }
@@ -74,30 +78,56 @@ struct GameView : View {
                 Divider()
                 Spacer()
                 PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
-            }
+            }.navigationBarTitle("Игра")
             Divider()
             ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
             Divider()
-            HStack {
-                Button(action: {
-                    self.game.homeScore += 1
-                }) {
-                    Image("defaultImage")
-                        .frame(width: 150, height: 150)
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(20)
-                }.padding(16)
-                Divider()
-                Button(action: {
-                    self.game.awayScore += 1
-                }) {
-                    Image("defaultImage")
-                        .frame(width: 150, height: 150)
-                        .aspectRatio(contentMode: .fill)
-                        .cornerRadius(20)
-                }.padding(16)
+            if game.isFinished {
+                VStack {
+                    Text("Победитель")
+                        .font(.system(.largeTitle, design: .rounded))
+                    PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
+                }
+            } else {
+                HStack {
+                    Button(action: {
+                        self.addScore(to: true)
+                    }) {
+                        Image("defaultImage")
+                            .frame(width: 150, height: 150)
+                            .aspectRatio(contentMode: .fill)
+                            .cornerRadius(20)
+                    }.padding(16)
+                    Divider()
+                    Button(action: {
+                        self.addScore(to: false)
+                    }) {
+                        Image("defaultImage")
+                            .frame(width: 150, height: 150)
+                            .aspectRatio(contentMode: .fill)
+                            .cornerRadius(20)
+                    }.padding(16)
+                }
             }
             Spacer()
+        }
+    }
+
+    func addScore(to isHome: Bool) {
+        if isHome {
+            game.homeScore += 1
+        } else {
+            game.awayScore += 1
+        }
+        endGameIfNeeded()
+    }
+
+    func endGameIfNeeded() {
+        if game.homeScore >= 11 && game.homeScore > game.awayScore && game.homeScore - game.awayScore >= 2 {
+            game.isFinished = true
+        }
+        if game.awayScore >= 11 && game.awayScore > game.homeScore && game.awayScore - game.homeScore >= 2 {
+            game.isFinished = true
         }
     }
 }
@@ -107,7 +137,7 @@ struct GameView_Previews : PreviewProvider {
     static var previews: some View {
         let homeUser = User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!)
         let awayUser = User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!)
-        return GameView(game: Game(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11))
+        return GameView(game: Game(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11, isFinished: true))
     }
 }
 #endif

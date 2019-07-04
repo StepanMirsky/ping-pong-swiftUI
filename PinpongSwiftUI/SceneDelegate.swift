@@ -17,22 +17,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            let ratingsController = UINavigationController(rootViewController: UIHostingController(rootView: RatingsView()))
-            ratingsController.navigationBar.prefersLargeTitles = true
+
+            let ratingsController = UIHostingController(rootView: RatingsView())
+            let ratingsNavigationController = UINavigationController(rootViewController: ratingsController)
+            ratingsNavigationController.navigationBar.prefersLargeTitles = true
             ratingsController.title = "Рейтинг"
-            let gamesController = UINavigationController(rootViewController: UIHostingController(rootView: GamesView()))
-            gamesController.navigationBar.prefersLargeTitles = true
+
+            let gamesController = UIHostingController(rootView: GamesView())
+            let gamesNavigationController = UINavigationController(rootViewController: gamesController)
+            gamesNavigationController.navigationBar.prefersLargeTitles = true
             gamesController.title = "Игры"
-            let profileController = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView()))
-            profileController.navigationBar.prefersLargeTitles = true
+
+            let profileController = UIHostingController(rootView: ProfileView(isMe: true))
+            let profileNavigationController = UINavigationController(rootViewController: profileController)
+            profileNavigationController.navigationBar.prefersLargeTitles = true
             profileController.title = "Профиль"
+
             let tabbarController = UITabBarController()
             
             tabbarController.setViewControllers(
-                [ratingsController, gamesController, profileController],
+                [ratingsNavigationController, gamesNavigationController, profileNavigationController],
                 animated: false
             )
-            
+            tabbarController.tabBar.items?[0].image = UIImage(named: "combo_chart")
+            tabbarController.tabBar.items?[1].image = UIImage(named: "game_controller")
+            tabbarController.tabBar.items?[2].image = UIImage(named: "businessman")
             window.rootViewController = tabbarController
             self.window = window
             window.makeKeyAndVisible()

@@ -25,9 +25,15 @@ struct RatingRow : View {
                     .color(.black)
                     .font(Font.system(.headline, design: .rounded))
                 Text(String(rating.value))
-                    .color((rating.value > 1000) ? .green : (rating.value < 500 ? .red : .gray))
+                    .color(Color.ratingColor(rating.value))
                     .font(Font.system(.subheadline, design: .rounded))
             }
         }
+    }
+}
+
+extension Color {
+    static func ratingColor(_ ratingValue: Int) -> Color {
+        return (ratingValue > 1000) ? .green : (ratingValue < 500 ? .red : .gray)
     }
 }
