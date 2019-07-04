@@ -15,12 +15,18 @@ struct RatingRow : View {
         HStack {
             Image(uiImage: rating.image)
                 .resizable()
-                .frame(width: 50, height: 50)
-                .aspectRatio(contentMode: .fill)
+                .frame(width: 35, height: 35, alignment: .center)
                 .clipShape(Circle())
-            VStack(alignment: .leading, spacing: 5.0) {
-                Text(rating.name).color(.black)
-                Text(String(rating.value)).color(.gray)
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 1))
+                .shadow(radius: 10)
+            VStack(alignment: .leading) {
+                Text(rating.name)
+                    .color(.black)
+                    .font(Font.system(.headline, design: .rounded))
+                Text(String(rating.value))
+                    .color((rating.value > 1000) ? .green : (rating.value < 500 ? .red : .gray))
+                    .font(Font.system(.subheadline, design: .rounded))
             }
         }
     }
