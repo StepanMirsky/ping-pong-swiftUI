@@ -24,26 +24,25 @@ struct LastGamesView : View {
 }
 
 struct RatingRow : View {
-    var rating: Rating
+    var user: User
     
     var body: some View {
         HStack {
-            Image(uiImage: rating.image)
+            Image(uiImage: user.image)
                 .resizable()
                 .frame(width: 35, height: 35, alignment: .center)
                 .clipShape(Circle())
-                .overlay(
-                    Circle().stroke(Color.white, lineWidth: 1))
+                .overlay(Circle().stroke(Color.white, lineWidth: 1))
                 .shadow(radius: 10)
             VStack(alignment: .leading) {
-                Text(rating.name)
+                Text(user.name)
                     .color(.black)
                     .font(Font.system(.headline, design: .rounded))
-                Text(String(rating.value))
-                    .color(.ratingColor(rating.value))
+                Text(String(user.value))
+                    .color(.ratingColor(user.rating))
                     .font(Font.system(.subheadline, design: .rounded))
             }
-            LastGamesView(lastGames: rating.lastWins)
+            LastGamesView(lastGames: user.lastWins)
         }
     }
 }

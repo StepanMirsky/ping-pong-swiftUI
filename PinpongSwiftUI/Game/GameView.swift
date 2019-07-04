@@ -135,8 +135,8 @@ struct GameView : View {
 #if DEBUG
 struct GameView_Previews : PreviewProvider {
     static var previews: some View {
-        let homeUser = User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!)
-        let awayUser = User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!)
+        let homeUser = User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!, lastWins: [])
+        let awayUser = User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!, lastWins: [])
         return GameView(game: Game(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11, isFinished: true))
     }
 }

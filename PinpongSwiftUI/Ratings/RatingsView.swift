@@ -13,33 +13,32 @@ struct ShortGame: Hashable {
     let isWin: Bool
 }
 
-struct Rating: Hashable, Identifiable {
+struct User: Hashable, Identifiable {
     let id = UUID()
     let name: String
-    let value: Int
+    let rating: Int
     let image: UIImage
     let lastWins: [ShortGame]
 }
 
 struct RatingsList: View {
-    var ratings: [Rating]
+    var users: [User]
     
     var body: some View {
-        List(ratings) { rating in
+        List(users) { user in
             NavigationLink(
-                destination: ProfileView(user:
-                    User(name: rating.name, rating: rating.value, image: rating.image), isMe: false)) {
-                RatingRow(rating: rating)
+                destination: ProfileView(user: user, isMe: false)) {
+                RatingRow(user: user)
             }
         }.listStyle(.grouped)
     }
 }
 
 struct RatingsView : View {
-    var ratings = [
-        Rating(
+    var users = [
+        User(
             name: "Серега",
-            value: 500,
+            rating: 500,
             image: UIImage(named: "defaultImage")!,
             lastWins: [
                 ShortGame(isWin: true),
@@ -47,9 +46,9 @@ struct RatingsView : View {
                 ShortGame(isWin: false)
             ]
         ),
-        Rating(
+        User(
             name: "Федя",
-            value: 1000,
+            rating: 1000,
             image: UIImage(named: "personOne")!,
             lastWins: [
                 ShortGame(isWin: true),
@@ -59,9 +58,9 @@ struct RatingsView : View {
                 ShortGame(isWin: true)
             ]
         ),
-        Rating(
+        User(
             name: "Антон",
-            value: 1500,
+            rating: 1500,
             image: UIImage(named: "defaultImage")!,
             lastWins: [
                 ShortGame(isWin: true),
@@ -70,23 +69,23 @@ struct RatingsView : View {
                 ShortGame(isWin: true)
             ]
         ),
-        Rating(
+        User(
             name: "Вика",
-            value: 800,
+            rating: 800,
             image: UIImage(named: "personTwo")!,
             lastWins: [
                 ShortGame(isWin: true),
                 ShortGame(isWin: false)            ]
         ),
-        Rating(
+        User(
             name: "Гриша",
-            value: 450,
+            rating: 450,
             image: UIImage(named: "defaultImage")!,
             lastWins: []
         )
     ]
     
     var body: some View {
-        RatingsList(ratings: ratings)
+        RatingsList(users: users)
     }
 }
