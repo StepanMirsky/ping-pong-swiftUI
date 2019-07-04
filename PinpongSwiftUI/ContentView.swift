@@ -1,9 +1,9 @@
 //
 //  ContentView.swift
-//  PingPong
+//  PinpongSwiftUI
 //
-//  Created by Мирский Степан Алексеевич on 04/07/2019.
-//  Copyright © 2019 DomclickPingPongTeam. All rights reserved.
+//  Created by Лесников Александр Максимович on 04/07/2019.
+//  Copyright © 2019 Лесников Александр Максимович. All rights reserved.
 //
 
 import SwiftUI

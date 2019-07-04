@@ -1,9 +1,9 @@
 //
 //  SceneDelegate.swift
-//  PingPong
+//  PinpongSwiftUI
 //
-//  Created by Мирский Степан Алексеевич on 04/07/2019.
-//  Copyright © 2019 DomclickPingPongTeam. All rights reserved.
+//  Created by Лесников Александр Максимович on 04/07/2019.
+//  Copyright © 2019 Лесников Александр Максимович. All rights reserved.
 //
 
 import UIKit
@@ -20,10 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Use a UIHostingController as window root view controller
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIHostingController(rootView: ContentView())
-        self.window = window
-        window.makeKeyAndVisible()
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            window.rootViewController = UIHostingController(rootView: ContentView())
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
