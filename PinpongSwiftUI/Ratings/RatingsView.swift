@@ -20,14 +20,10 @@ struct RatingsList: View {
     
     var body: some View {
         List(ratings) { rating in
-            RatingRow(rating: rating).tapAction {
-                self.ratingTapped(rating)
+            NavigationLink(destination: ProfileView(user: User(name: rating.name, rating: rating.value, image: rating.image))) {
+                RatingRow(rating: rating)
             }
         }.listStyle(.grouped)
-    }
-    
-    func ratingTapped(_ rating: Rating) {
-        print("rating tapped with id \(rating.id)")
     }
 }
 
