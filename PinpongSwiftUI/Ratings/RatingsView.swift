@@ -20,14 +20,20 @@ struct RatingsList: View {
     
     var body: some View {
         List(ratings) { rating in
-            RatingRow(rating: rating)
+            RatingRow(rating: rating).tapAction {
+                self.ratingTapped(rating)
+            }
         }.listStyle(.grouped)
+    }
+    
+    func ratingTapped(_ rating: Rating) {
+        print("rating tapped with id \(rating.id)")
     }
 }
 
 struct RatingsView : View {
     var ratings = [Rating(name: "Серега", value: 500, image: UIImage(named: "defaultImage")!),
-                   Rating(name: "Федя", value: 600, image: UIImage())]
+                   Rating(name: "Федя", value: 600, image: UIImage(named: "defaultImage")!)]
     
     var body: some View {
         RatingsList(ratings: ratings)

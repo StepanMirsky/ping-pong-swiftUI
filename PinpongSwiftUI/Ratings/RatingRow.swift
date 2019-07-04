@@ -15,9 +15,9 @@ struct RatingRow : View {
         HStack {
             Image(uiImage: rating.image)
                 .resizable()
-                .frame(width: 40, height: 40)
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(5.0)
+                .frame(width: 50, height: 50)
+                .aspectRatio(contentMode: .fill)
+                .clipShape(Circle())
             VStack(alignment: .leading, spacing: 5.0) {
                 Text(rating.name).color(.black)
                 Text(String(rating.value)).color(.gray)

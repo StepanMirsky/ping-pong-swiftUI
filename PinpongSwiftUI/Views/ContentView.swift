@@ -17,10 +17,6 @@ struct ContentView : View {
                 RatingsView()
             }.tabItem {
                 VStack {
-                    Image("ratings")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .aspectRatio(contentMode: .fit)
                     Text("Raings")
                 }
             }.tag(0)
@@ -29,10 +25,6 @@ struct ContentView : View {
                 GamesView()
             }.tabItem {
                 VStack {
-                    Image("games")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .aspectRatio(contentMode: .fit)
                     Text("Games")
                 }
             }.tag(1)
@@ -41,10 +33,6 @@ struct ContentView : View {
                 ProfileView()
             }.tabItem {
                 VStack {
-                    Image("profile")
-                        .resizable()
-                        .frame(width: 40, height: 40)
-                        .aspectRatio(contentMode: .fit)
                     Text("Profile")
                 }
             }.tag(2)
