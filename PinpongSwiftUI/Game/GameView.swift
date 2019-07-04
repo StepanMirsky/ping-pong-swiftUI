@@ -94,7 +94,7 @@ struct GameView : View {
 #if DEBUG
 struct GameView_Previews : PreviewProvider {
     static var previews: some View {
-        GameView(homeUser: User(name: "Home", rating: 400, image: nil), awayUser: User(name: "Away", rating: 600, image: nil))
+        GameView(homeUser: User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!), awayUser: User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!))
     }
 }
 #endif
