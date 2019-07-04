@@ -10,14 +10,12 @@ import SwiftUI
 
 struct HistoryRow: View {
     let game: Game
-    var body: some View {
+    var body: some View {п
         ZStack {
             HStack() {
-                GamesProfileView(user: game.homeUser)
+                GamesProfileView(user: game.homeUser, isHome: true)
                 Spacer()
-                GamesProfileView(user: game.awayUser)
-                            Spacer()
-            }
+                GamesProfileView(user: game.awayUser, isHome: false)            }
             GamesScoreView(game: game)
         }
     }
@@ -28,8 +26,8 @@ struct GamesView : View {
     
     @State var arr = [
         Game(
-            homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!),
-            awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!),
+            homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "СаняЯЯЯЯЯЯ", rating: 100, image: UIImage(named: "personTwo")!),
             homeScore: 1,
             awayScore: 6,
             isFinished: true
@@ -62,9 +60,13 @@ struct GamesView : View {
 
 struct GamesProfileView: View {
     let user: User
+    let isHome: Bool
+    var imageAligment: HorizontalAlignment {
+        return isHome ? .leading : .trailing
+    }
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: imageAligment) {
             Image(uiImage: user.image)
                 .resizable()
                 .frame(width: 35, height: 35, alignment: .center)
