@@ -13,21 +13,38 @@ struct ContentView : View {
     
     var body: some View {
         TabbedView(selection: $selection) {
-            RatingsView().tabItem {
+            NavigationView {
+                RatingsView()
+            }.tabItem {
                 VStack {
                     Image("ratings")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .aspectRatio(contentMode: .fit)
                     Text("Raings")
                 }
             }.tag(0)
-            GamesView().tabItem {
+
+            NavigationView {
+                GamesView()
+            }.tabItem {
                 VStack {
                     Image("games")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .aspectRatio(contentMode: .fit)
                     Text("Games")
                 }
             }.tag(1)
-            ProfileView().tabItem {
+            
+            NavigationView {
+                ProfileView()
+            }.tabItem {
                 VStack {
                     Image("profile")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .aspectRatio(contentMode: .fit)
                     Text("Profile")
                 }
             }.tag(2)
