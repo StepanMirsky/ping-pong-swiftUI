@@ -22,6 +22,8 @@ struct HistoryRow: View {
 }
 
 struct GamesView : View {
+    var userId: String?
+    
     @State var arr = [
         Game(
             homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!, lastWins: []),

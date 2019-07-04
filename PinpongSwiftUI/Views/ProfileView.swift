@@ -49,7 +49,6 @@ struct ProfileView : View {
                         .aspectRatio(contentMode: .fill)
                         .clipShape(Circle())
                 }
-                
                 Text(user.name)
                     .font(Font.system(.largeTitle, design: .rounded))
                 Text("\(user.rating)")
@@ -61,6 +60,10 @@ struct ProfileView : View {
                         Text("Вызвать")
                             .font(.system(.headline, design: .rounded))
                     }
+                }
+                Spacer()
+                NavigationLink(destination: GamesView(userId: user.name) ) {
+                    Text("Посмотреть все игры")
                 }
             }
         }
