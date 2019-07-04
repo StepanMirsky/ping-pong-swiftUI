@@ -36,6 +36,7 @@ struct PlayerView : View {
                     .font(.system(.title, design: .rounded))
             Text(String(user.rating))
                 .font(.system(.headline, design: .rounded))
+                .color(.ratingColor(user.rating))
         }
     }
 }
