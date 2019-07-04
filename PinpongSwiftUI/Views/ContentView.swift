@@ -9,33 +9,4 @@
 import SwiftUI
 
 struct ContentView : View {
-    @State private var selection = 0
-    
-    var body: some View {
-        TabbedView(selection: $selection) {
-            NavigationView {
-                RatingsView()
-            }.tabItem {
-                VStack {
-                    Text("Raings")
-                }
-            }.tag(0)
-
-            NavigationView {
-                GamesView()
-            }.tabItem {
-                VStack {
-                    Text("Games")
-                }
-            }.tag(1)
-            
-            NavigationView {
-                ProfileView()
-            }.tabItem {
-                VStack {
-                    Text("Profile")
-                }
-            }.tag(2)
-        }
-    }
 }

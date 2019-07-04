@@ -20,7 +20,7 @@ struct RatingsList: View {
     
     var body: some View {
         List(ratings) { rating in
-            NavigationLink(destination: ProfileView(user: User(name: rating.name, rating: rating.value, image: rating.image))) {
+            NavigationLink(destination: ProfileView(user: User(name: rating.name, rating: rating.value, image: rating.image), isMe: false)) {
                 RatingRow(rating: rating)
             }
         }.listStyle(.grouped)
