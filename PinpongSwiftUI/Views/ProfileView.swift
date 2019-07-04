@@ -28,6 +28,7 @@ struct ProfileView : View {
                 Text(user.name)
                     .font(Font.system(size: 25, design: .rounded))
                 Text("\(user.rating)")
+                    .color((user.rating > 1000) ? .green : (user.rating < 500 ? .red : .gray))
                     .font(Font.system(size: 25, design: .rounded))
             }
         }
