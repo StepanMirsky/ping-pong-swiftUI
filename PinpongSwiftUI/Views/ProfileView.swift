@@ -15,7 +15,7 @@ struct User {
 }
 
 struct ProfileView : View {
-    var user: User = User.init(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
+    var user: User = User(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
     var isMe: Bool
     var homeUser: User {
         return User(name: "Это я", rating: 1000, image: UIImage(named: "defaultImage")!)

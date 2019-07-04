@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HistoryRow: View {
     let game: Game
-    var body: some View {п
+    var body: some View {
         ZStack {
             HStack() {
                 GamesProfileView(user: game.homeUser, isHome: true)
