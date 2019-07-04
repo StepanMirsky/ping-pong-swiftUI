@@ -27,108 +27,39 @@ struct GameHistory: Identifiable, Hashable {
 }
 
 struct HistoryRow: View {
-    let game: GameHistory
-    
+    let game: Game
     var body: some View {
-        HStack(alignment: .center) {
-            Spacer()
-            Image(game.personOneImageUrl)
-                .resizable()
-                .frame(width: 35, height: 35, alignment: .center)
-                .clipShape(Circle())
-                .overlay(
-                    Circle().stroke(Color.white, lineWidth: 1))
-                .shadow(radius: 10)
-            Text("\(game.personOne)")
-            Spacer()
-            Text("\(game.personOneScore) : \(game.personTwoScore)")
-            Spacer()
-            Text("\(game.personTwo)")
-            Image(game.personTwoImageUrl)
-                .resizable()
-                .frame(width: 35, height: 35, alignment: .center)
-                .clipShape(Circle())
-                .overlay(
-                    Circle().stroke(Color.white, lineWidth: 1))
-                .shadow(radius: 4)
-            Spacer()
+        ZStack {
+            HStack() {
+                GamesProfileView(user: game.homeUser)
+                Spacer()
+                GamesProfileView(user: game.awayUser)
+                            Spacer()
+            }
+            GamesScoreView(game: game)
         }
     }
 }
 
 struct GamesView : View {
     @State var arr = [
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
+        Game(
+            homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Серега", rating: 100, image: UIImage(named: "personTwo")!),
+            homeScore: 11,
+            awayScore: 9
         ),
-        GameHistory(
-            personOne: "Серега",
-            personTwo: "Саня",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
+        Game(
+            homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!),
+            homeScore: 1,
+            awayScore: 11
         ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
-        ),
-        GameHistory(
-            personOne: "Саня",
-            personTwo: "Серега",
-            personOneScore: "9",
-            personTwoScore: "11",
-            personOneImageUrl: "personOne",
-            personTwoImageUrl: "personTwo"
+        Game(
+            homeUser: User(name: "Степан", rating: 100, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Виталий", rating: 100, image: UIImage(named: "personTwo")!),
+            homeScore: 11,
+            awayScore: 9
         )
     ]
     
@@ -139,5 +70,59 @@ struct GamesView : View {
             }
         }.listStyle(.grouped)
         
+    }
+}
+
+struct GamesProfileView: View {
+    let user: User
+    
+    var body: some View {
+        VStack(alignment: .center) {
+            Image(uiImage: user.image)
+                .resizable()
+                .frame(width: 35, height: 35, alignment: .center)
+                .clipShape(Circle())
+                .overlay(
+                    Circle().stroke(Color.white, lineWidth: 1))
+                .shadow(radius: 10)
+            Text("\(user.name)")
+                .font(.headline)
+        }
+    }
+}
+
+struct GamesScoreView: View {
+    let game: Game
+    
+    var body: some View {
+        ZStack {
+            HStack(alignment: .center, spacing: 10) {
+                HStack {
+                    Spacer()
+                    Text("\(game.homeScore)")
+                        .font(.headline)
+                        .color(game.homeScoreColor)
+                }
+                
+                HStack {
+                    Text("\(game.awayScore)")
+                        .font(.headline)
+                        .color(game.awayScoreColor)
+                    Spacer()
+                }
+            }
+            Text(":")
+                .font(.headline)
+        }
+    }
+}
+
+private extension Game {
+    var homeScoreColor: Color {
+        return homeIsWinner ? .green : .black
+    }
+    
+    var awayScoreColor: Color {
+        return awayIsWinner ? .green : .black
     }
 }

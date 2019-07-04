@@ -8,7 +8,8 @@
 
 import SwiftUI
 
-struct Game {
+struct Game: Identifiable {
+    let id = UUID()
     let homeUser: User
     let awayUser: User
     var homeScore: UInt
