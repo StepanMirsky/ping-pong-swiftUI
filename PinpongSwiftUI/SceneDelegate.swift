@@ -17,7 +17,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-
             let ratingsController = UIHostingController(rootView: RatingsView())
             let ratingsNavigationController = UINavigationController(rootViewController: ratingsController)
             ratingsNavigationController.navigationBar.prefersLargeTitles = true

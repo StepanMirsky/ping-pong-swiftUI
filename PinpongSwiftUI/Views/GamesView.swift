@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HistoryRow: View {
     let game: Game
-    var body: some View {п
+    var body: some View {
         ZStack {
             HStack() {
                 GamesProfileView(user: game.homeUser, isHome: true)
@@ -24,22 +24,22 @@ struct HistoryRow: View {
 struct GamesView : View {
     @State var arr = [
         Game(
-            homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!),
-            awayUser: User(name: "СаняЯЯЯЯЯЯ", rating: 100, image: UIImage(named: "personTwo")!),
+            homeUser: User(name: "Саня", rating: 1000, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Степансерега", rating: 1000, image: UIImage(named: "personTwo")!),
             homeScore: 1,
             awayScore: 6,
             isFinished: true
         ),
         Game(
-            homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!),
-            awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!),
+            homeUser: User(name: "Серега", rating: 1000, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Саня", rating: 1000, image: UIImage(named: "personTwo")!),
             homeScore: 1,
             awayScore: 11,
             isFinished: true
         ),
         Game(
-            homeUser: User(name: "Степан", rating: 100, image: UIImage(named: "personOne")!),
-            awayUser: User(name: "Виталий", rating: 100, image: UIImage(named: "personTwo")!),
+            homeUser: User(name: "Степан", rating: 1000, image: UIImage(named: "personOne")!),
+            awayUser: User(name: "Виталий", rating: 1000, image: UIImage(named: "personTwo")!),
             homeScore: 11,
             awayScore: 9,
             isFinished: true
@@ -67,14 +67,19 @@ struct GamesProfileView: View {
         VStack(alignment: imageAligment) {
             Image(uiImage: user.image)
                 .resizable()
-                .frame(width: 35, height: 35, alignment: .center)
+                .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
                 .overlay(
                     Circle().stroke(Color.white, lineWidth: 1))
+                    
                 .shadow(radius: 10)
             Text("\(user.name)")
                 .font(.headline)
+            Text("Рейтинг: \(user.rating)")
+                .font(.subheadline)
+                .color(.gray)
         }
+        .padding(10)
     }
 }
 
@@ -83,33 +88,36 @@ struct GamesScoreView: View {
     
     var body: some View {
         ZStack {
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 20) {
                 HStack {
                     Spacer()
                     Text("\(game.homeScore)")
-                        .font(.headline)
+                        .font(.largeTitle)
                         .color(game.homeScoreColor)
+                        .bold()
                 }
                 
                 HStack {
                     Text("\(game.awayScore)")
-                        .font(.headline)
+                        .font(.largeTitle)
                         .color(game.awayScoreColor)
+                    .bold()
                     Spacer()
                 }
             }
             Text(":")
-                .font(.headline)
+                .font(.largeTitle)
+                .bold()
         }
     }
 }
 
 private extension Game {
     var homeScoreColor: Color {
-        return homeIsWinner ? .green : .black
+        return homeIsWinner ? .green : .red
     }
     
     var awayScoreColor: Color {
-        return awayIsWinner ? .green : .black
+        return awayIsWinner ? .green : .red
     }
 }
