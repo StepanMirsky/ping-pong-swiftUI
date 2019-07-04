@@ -18,7 +18,7 @@ struct User: Hashable, Identifiable {
     let name: String
     let rating: Int
     let image: UIImage
-    let lastWins: [ShortGame]
+    let lastGames: [ShortGame]
 }
 
 struct RatingsList: View {
@@ -40,7 +40,7 @@ struct RatingsView : View {
             name: "Серега",
             rating: 500,
             image: UIImage(named: "defaultImage")!,
-            lastWins: [
+            lastGames: [
                 ShortGame(isWin: true),
                 ShortGame(isWin: false),
                 ShortGame(isWin: false)
@@ -50,7 +50,7 @@ struct RatingsView : View {
             name: "Федя",
             rating: 1000,
             image: UIImage(named: "personOne")!,
-            lastWins: [
+            lastGames: [
                 ShortGame(isWin: true),
                 ShortGame(isWin: false),
                 ShortGame(isWin: false),
@@ -62,7 +62,7 @@ struct RatingsView : View {
             name: "Антон",
             rating: 1500,
             image: UIImage(named: "defaultImage")!,
-            lastWins: [
+            lastGames: [
                 ShortGame(isWin: true),
                 ShortGame(isWin: true),
                 ShortGame(isWin: false),
@@ -73,7 +73,7 @@ struct RatingsView : View {
             name: "Вика",
             rating: 800,
             image: UIImage(named: "personTwo")!,
-            lastWins: [
+            lastGames: [
                 ShortGame(isWin: true),
                 ShortGame(isWin: false)            ]
         ),
@@ -81,7 +81,7 @@ struct RatingsView : View {
             name: "Гриша",
             rating: 450,
             image: UIImage(named: "defaultImage")!,
-            lastWins: []
+            lastGames: []
         )
     ]
     

@@ -13,7 +13,7 @@ struct ProfileView : View {
         name: "Sergey",
         rating: 1000,
         image: UIImage(named: "defaultImage")!,
-        lastWins: [
+        lastGames: [
             ShortGame(isWin: false),
             ShortGame(isWin: true)
         ]
@@ -26,7 +26,7 @@ struct ProfileView : View {
             name: "Это я",
             rating: 1000,
             image: UIImage(named: "defaultImage")!,
-            lastWins: [
+            lastGames: [
                 ShortGame(isWin: false),
                 ShortGame(isWin: true)
             ]
@@ -54,7 +54,7 @@ struct ProfileView : View {
                 Text("\(user.rating)")
                     .color(Color.ratingColor(user.rating))
                     .font(Font.system(.headline, design: .rounded))
-                LastGamesView(lastGames: user.lastWins)
+                LastGamesView(lastGames: user.lastGames)
                 if !isMe {
                     NavigationLink(destination: GameView(game: Game(homeUser: homeUser, awayUser: user, homeScore: 0, awayScore: 0, isFinished: false))) {
                         Text("Вызвать")

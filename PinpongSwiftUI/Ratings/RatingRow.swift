@@ -38,11 +38,11 @@ struct RatingRow : View {
                 Text(user.name)
                     .color(.black)
                     .font(Font.system(.headline, design: .rounded))
-                Text(String(user.value))
+                Text(String(user.rating))
                     .color(.ratingColor(user.rating))
                     .font(Font.system(.subheadline, design: .rounded))
             }
-            LastGamesView(lastGames: user.lastWins)
+            LastGamesView(lastGames: user.lastGames)
         }
     }
 }
