@@ -15,7 +15,8 @@ struct HistoryRow: View {
             HStack() {
                 GamesProfileView(user: game.homeUser, isHome: true)
                 Spacer()
-                GamesProfileView(user: game.awayUser, isHome: false)            }
+                GamesProfileView(user: game.awayUser, isHome: false)
+            }
             GamesScoreView(game: game)
         }
     }

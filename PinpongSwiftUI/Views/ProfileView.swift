@@ -63,7 +63,7 @@ struct ProfileView : View {
                     }
                 }
                 Spacer()
-                NavigationLink(destination: GamesView(userId: user.id) ) {
+                NavigationLink(destination: RegistrationView() ) {
                     Text("Посмотреть все игры")
                 }
             }
