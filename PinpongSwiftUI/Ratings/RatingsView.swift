@@ -35,9 +35,21 @@ struct RatingsList: View {
 }
 
 struct RatingsView : View {
-    var users = Storage.shared.users
+    let userService: UserService = UserServiceImpl()
+
+    @State var users: [User] = []
     
     var body: some View {
         RatingsList(users: users)
+            .onAppear {
+                self.userService.getUsers { result in
+                    switch result {
+                    case .success(let users):
+                        self.users = users
+                    case .failure:
+                        break
+                    }
+                }
+        }
     }
 }

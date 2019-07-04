@@ -68,6 +68,8 @@ struct ScoreView : View {
 }
 
 struct GameView : View {
+    let gameService: GameService = GameServiceImpl()
+
     @State var game: Game
 
     var body: some View {
@@ -93,19 +95,19 @@ struct GameView : View {
                     Button(action: {
                         self.addScore(to: true)
                     }) {
-                        Image("defaultImage")
+                        Rectangle()
                             .frame(width: 150, height: 150)
-                            .aspectRatio(contentMode: .fill)
                             .cornerRadius(20)
+                            .foregroundColor(.green)
                     }.padding(16)
                     Divider()
                     Button(action: {
                         self.addScore(to: false)
                     }) {
-                        Image("defaultImage")
+                        Rectangle()
                             .frame(width: 150, height: 150)
-                            .aspectRatio(contentMode: .fill)
                             .cornerRadius(20)
+                            .foregroundColor(.blue)
                     }.padding(16)
                 }
             }
@@ -120,6 +122,7 @@ struct GameView : View {
             game.awayScore += 1
         }
         endGameIfNeeded()
+        gameService.updateGame(game) { _ in }
     }
 
     func endGameIfNeeded() {

@@ -9,39 +9,39 @@
 import SwiftUI
 
 struct GamesView : View {
-    var userId: String?
-    
-    @State var arr = [
-        Game(
-            homeUser: User(name: "Саня", rating: 100, image: UIImage(named: "personOne")!, lastGames: []),
-            awayUser: User(name: "СаняЯЯЯЯЯЯ", rating: 100, image: UIImage(named: "personTwo")!, lastGames: []),
-            homeScore: 1,
-            awayScore: 6,
-            isFinished: true
-        ),
-        Game(
-            homeUser: User(name: "Серега", rating: 100, image: UIImage(named: "personOne")!, lastGames: []),
-            awayUser: User(name: "Саня", rating: 100, image: UIImage(named: "personTwo")!, lastGames: []),
-            homeScore: 1,
-            awayScore: 11,
-            isFinished: true
-        ),
-        Game(
-            homeUser: User(name: "Степан", rating: 100, image: UIImage(named: "personOne")!, lastGames: []),
-            awayUser: User(name: "Виталий", rating: 100, image: UIImage(named: "personTwo")!, lastGames: []),
-            homeScore: 11,
-            awayScore: 9,
-            isFinished: true
-        )
-    ]
+    let gameService: GameService = GameServiceImpl()
+
+    var userName: String?
+    @State var games: [Game] = []
     
     var body: some View {
-        List {
-            ForEach(arr) { game in
+        List(games) { game in
+            NavigationLink(destination: GameView(game: game)) {
                 HistoryRow(game: game)
             }
-        }.listStyle(.grouped)
-        
+        }
+            .listStyle(.grouped)
+            .onAppear {
+                if let userName = self.userName {
+                    self.gameService.getGames(by: userName) { result in
+                        switch result {
+                        case .success(let games):
+                            self.games = games
+                        case .failure:
+                            break
+                        }
+                    }
+                } else {
+                    self.gameService.getGames { result in
+                        switch result {
+                        case .success(let games):
+                            self.games = games
+                        case .failure:
+                            break
+                        }
+                    }
+                }
+        }
     }
 }
 
