@@ -32,8 +32,10 @@ struct PlayerView : View {
                 .frame(width: 125, height: 125)
                 .aspectRatio(contentMode: .fill)
                 .clipShape(Circle())
-            Text(user.name).font(.system(size: 24))
+            Text(user.name)
+                    .font(.system(.title, design: .rounded))
             Text(String(user.rating))
+                .font(.system(.headline, design: .rounded))
         }
     }
 }
@@ -81,6 +83,7 @@ struct GameView : View {
             if game.isFinished {
                 VStack {
                     Text("Победитель")
+                        .font(.system(.largeTitle, design: .rounded))
                     PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
                 }
             } else {
