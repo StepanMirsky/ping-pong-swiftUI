@@ -36,10 +36,10 @@ struct ProfileView : View {
                 }
                 
                 Text(user.name)
-                    .font(Font.system(size: 25, design: .rounded))
+                    .font(Font.system(.largeTitle, design: .rounded))
                 Text("\(user.rating)")
                     .color(Color.ratingColor(user.rating))
-                    .font(Font.system(size: 25, design: .rounded))
+                    .font(Font.system(.title, design: .rounded))
             }
         }
     }

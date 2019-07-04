@@ -39,7 +39,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 [ratingsNavigationController, gamesNavigationController, profileNavigationController],
                 animated: false
             )
-            
+            tabbarController.tabBar.items?[0].image = UIImage(named: "combo_chart")
+            tabbarController.tabBar.items?[1].image = UIImage(named: "game_controller")
+            tabbarController.tabBar.items?[2].image = UIImage(named: "businessman")
             window.rootViewController = tabbarController
             self.window = window
             window.makeKeyAndVisible()
