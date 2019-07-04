@@ -35,6 +35,7 @@ struct ProfileView : View {
 
     var body: some View {
         ScrollView {
+            
             VStack(alignment: .center, spacing: 20) {
                 if isMe {
                     PresentationLink(destination: RegistrationView()) {
@@ -62,7 +63,7 @@ struct ProfileView : View {
                     }
                 }
                 Spacer()
-                NavigationLink(destination: GamesView(userId: user.name) ) {
+                NavigationLink(destination: GamesView(userId: user.id) ) {
                     Text("Посмотреть все игры")
                 }
             }
