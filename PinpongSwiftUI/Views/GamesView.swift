@@ -69,14 +69,19 @@ struct GamesProfileView: View {
         VStack(alignment: imageAligment) {
             Image(uiImage: user.image)
                 .resizable()
-                .frame(width: 35, height: 35, alignment: .center)
+                .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
                 .overlay(
                     Circle().stroke(Color.white, lineWidth: 1))
+                    
                 .shadow(radius: 10)
             Text("\(user.name)")
                 .font(.headline)
+            Text("Рейтинг: \(user.rating)")
+                .font(.subheadline)
+                .color(.gray)
         }
+        .padding(10)
     }
 }
 
@@ -85,33 +90,36 @@ struct GamesScoreView: View {
     
     var body: some View {
         ZStack {
-            HStack(alignment: .center, spacing: 10) {
+            HStack(alignment: .center, spacing: 20) {
                 HStack {
                     Spacer()
                     Text("\(game.homeScore)")
-                        .font(.headline)
+                        .font(.largeTitle)
                         .color(game.homeScoreColor)
+                        .bold()
                 }
                 
                 HStack {
                     Text("\(game.awayScore)")
-                        .font(.headline)
+                        .font(.largeTitle)
                         .color(game.awayScoreColor)
+                    .bold()
                     Spacer()
                 }
             }
             Text(":")
-                .font(.headline)
+                .font(.largeTitle)
+                .bold()
         }
     }
 }
 
 private extension Game {
     var homeScoreColor: Color {
-        return homeIsWinner ? .green : .black
+        return homeIsWinner ? .green : .red
     }
     
     var awayScoreColor: Color {
-        return awayIsWinner ? .green : .black
+        return awayIsWinner ? .green : .red
     }
 }
