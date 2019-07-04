@@ -13,26 +13,24 @@ struct LoginView : View {
     @State var password: String = ""
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Введите логин")
-                    .navigationBarTitle("Войдите")
-                TextField("", text: $login)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal, 16)
-                Text("Введите пароль")
-                SecureField("", text: $password)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(.horizontal,16)
-                HStack {
-                    Button("Войти") {
-                        self.signin()
-                    }.padding(16)
-                    NavigationLink(destination: RegistrationView()) {
-                        Text("Зарегистрироваться")
-                            .color(.blue)
-                    }.padding(16)
-                }
+        VStack {
+            Text("Введите логин")
+                .navigationBarTitle("Войдите")
+            TextField("", text: $login)
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal, 16)
+            Text("Введите пароль")
+            SecureField("", text: $password)
+                .textFieldStyle(.roundedBorder)
+                .padding(.horizontal,16)
+            HStack {
+                Button("Войти") {
+                    self.signin()
+                }.padding(16)
+                NavigationLink(destination: RegistrationView()) {
+                    Text("Зарегистрироваться")
+                        .color(.blue)
+                }.padding(16)
             }
         }
     }

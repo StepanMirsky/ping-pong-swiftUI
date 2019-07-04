@@ -18,10 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let ratingsController = UINavigationController(rootViewController: UIHostingController(rootView: RatingsView()))
+            ratingsController.navigationBar.prefersLargeTitles = true
             ratingsController.title = "Рейтинг"
             let gamesController = UINavigationController(rootViewController: UIHostingController(rootView: GamesView()))
+            gamesController.navigationBar.prefersLargeTitles = true
             gamesController.title = "Игры"
             let profileController = UINavigationController(rootViewController: UIHostingController(rootView: ProfileView()))
+            profileController.navigationBar.prefersLargeTitles = true
             profileController.title = "Профиль"
             let tabbarController = UITabBarController()
             
