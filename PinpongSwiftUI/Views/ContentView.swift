@@ -13,23 +13,26 @@ struct ContentView : View {
     
     var body: some View {
         TabbedView(selection: $selection) {
-            RatingsView().tabItem {
+            NavigationView {
+                RatingsView()
+            }.tabItem {
                 VStack {
-                    Image("ratings")
                     Text("Raings")
                 }
             }.tag(0)
-            GamesView().tabItem {
+
+            NavigationView {
+                GamesView()
+            }.tabItem {
                 VStack {
-                    Image("games")
                     Text("Games")
                 }
             }.tag(1)
+            
             NavigationView {
                 ProfileView()
             }.tabItem {
                 VStack {
-                    Image("profile")
                     Text("Profile")
                 }
             }.tag(2)
