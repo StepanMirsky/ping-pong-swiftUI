@@ -8,6 +8,19 @@
 
 import SwiftUI
 
+struct Game {
+    let homeUser: User
+    let awayUser: User
+    var homeScore: UInt
+    var awayScore: UInt
+    var homeIsWinner: Bool {
+        return homeScore > awayScore
+    }
+    var awayIsWinner: Bool {
+        return !homeIsWinner
+    }
+}
+
 struct PlayerView : View {
     let user: User
     let textAlignment: HorizontalAlignment
@@ -25,8 +38,8 @@ struct PlayerView : View {
 }
 
 struct ScoreView : View {
-    let homeScore: Int
-    let awayScore: Int
+    let homeScore: UInt
+    let awayScore: UInt
 
     var body: some View {
         ZStack {
@@ -50,26 +63,23 @@ struct ScoreView : View {
 }
 
 struct GameView : View {
-    let homeUser: User
-    let awayUser: User
-    @State var homeScore: Int = 0
-    @State var awayScore: Int = 0
+    @State var game: Game
 
     var body: some View {
         VStack {
             HStack {
-                PlayerView(user: homeUser, textAlignment: .leading).padding(.leading, 24)
+                PlayerView(user: game.homeUser, textAlignment: .leading).padding(.leading, 24)
                 Spacer()
                 Divider()
                 Spacer()
-                PlayerView(user: awayUser, textAlignment: .trailing).padding(.trailing, 24)
+                PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
             }
             Divider()
-            ScoreView(homeScore: homeScore, awayScore: awayScore)
+            ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
             Divider()
             HStack {
                 Button(action: {
-                    self.homeScore += 1
+                    self.game.homeScore += 1
                 }) {
                     Image("defaultImage")
                         .frame(width: 150, height: 150)
@@ -78,7 +88,7 @@ struct GameView : View {
                 }.padding(16)
                 Divider()
                 Button(action: {
-                    self.awayScore += 1
+                    self.game.awayScore += 1
                 }) {
                     Image("defaultImage")
                         .frame(width: 150, height: 150)
@@ -94,7 +104,9 @@ struct GameView : View {
 #if DEBUG
 struct GameView_Previews : PreviewProvider {
     static var previews: some View {
-        GameView(homeUser: User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!), awayUser: User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!))
+        let homeUser = User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!)
+        let awayUser = User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!)
+        return GameView(game: Game(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11))
     }
 }
 #endif
