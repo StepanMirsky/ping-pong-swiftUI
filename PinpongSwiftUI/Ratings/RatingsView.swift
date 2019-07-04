@@ -29,7 +29,10 @@ struct RatingsList: View {
 
 struct RatingsView : View {
     var ratings = [Rating(name: "Серега", value: 500, image: UIImage(named: "defaultImage")!),
-                   Rating(name: "Федя", value: 600, image: UIImage(named: "defaultImage")!)]
+                   Rating(name: "Федя", value: 1000, image: UIImage(named: "defaultImage")!),
+                   Rating(name: "Антон", value: 1500, image: UIImage(named: "defaultImage")!),
+                   Rating(name: "Вика", value: 800, image: UIImage(named: "defaultImage")!),
+                   Rating(name: "Гриша", value: 450, image: UIImage(named: "defaultImage")!)]
     
     var body: some View {
         RatingsList(ratings: ratings)
