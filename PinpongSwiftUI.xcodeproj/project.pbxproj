@@ -15,6 +15,7 @@
 		541D13C722CE184C00F5057F /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541D13C622CE184C00F5057F /* GameView.swift */; };
 		54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD022CDF5D8005F4C88 /* LoginView.swift */; };
 		54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD122CDF5D8005F4C88 /* RegistrationView.swift */; };
+		54D2E13122CE5FB60067EB5E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13022CE5FB60067EB5E /* Storage.swift */; };
 		6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF722CDE54100DE4E5D /* AppDelegate.swift */; };
 		6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */; };
 		6A114CFE22CDE54100DE4E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A114CFD22CDE54100DE4E5D /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 		54487AD022CDF5D8005F4C88 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		54487AD122CDF5D8005F4C88 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		548D0A6322CE11A6006B8C37 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		54D2E13022CE5FB60067EB5E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinpongSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A114CF722CDE54100DE4E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		54D2E12F22CE5F7F0067EB5E /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				54D2E13022CE5FB60067EB5E /* Storage.swift */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
 		6A114CEB22CDE54100DE4E5D = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +125,7 @@
 		6A114CF622CDE54100DE4E5D /* PinpongSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				54D2E12F22CE5F7F0067EB5E /* Business */,
 				541D13C522CE17F700F5057F /* Game */,
 				284E10BB22CE3356006E10CB /* Ratings */,
 				54487ACB22CDF5A9005F4C88 /* Auth */,
@@ -223,6 +234,7 @@
 				54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */,
 				2831E1CC22CDFA3700CB7415 /* ProfileView.swift in Sources */,
 				284E10BE22CE3356006E10CB /* RatingsView.swift in Sources */,
+				54D2E13122CE5FB60067EB5E /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
