@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,13 +12,13 @@
 		2831E1CD22CDFA3700CB7415 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1CA22CDFA3700CB7415 /* GamesView.swift */; };
 		2831E1CF22CDFA8100CB7415 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2831E1CE22CDFA8100CB7415 /* Preview Assets.xcassets */; };
 		2831E1D322CE001200CB7415 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1D222CE001200CB7415 /* ContentView.swift */; };
-		2831E1D522CE28C400CB7415 /* RatingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2831E1D422CE28C400CB7415 /* RatingRow.swift */; };
 		54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD022CDF5D8005F4C88 /* LoginView.swift */; };
 		54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD122CDF5D8005F4C88 /* RegistrationView.swift */; };
 		6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF722CDE54100DE4E5D /* AppDelegate.swift */; };
 		6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */; };
 		6A114CFE22CDE54100DE4E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A114CFD22CDE54100DE4E5D /* Assets.xcassets */; };
 		6A114D0422CDE54100DE4E5D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A114D0222CDE54100DE4E5D /* LaunchScreen.storyboard */; };
+		6A5D65EF22CE17A1001EDD64 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 6A5D65EE22CE17A1001EDD64 /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,6 @@
 		2831E1CA22CDFA3700CB7415 /* GamesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		2831E1CE22CDFA8100CB7415 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2831E1D222CE001200CB7415 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		2831E1D422CE28C400CB7415 /* RatingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingRow.swift; sourceTree = "<group>"; };
 		54487AD022CDF5D8005F4C88 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		54487AD122CDF5D8005F4C88 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinpongSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A5D65EF22CE17A1001EDD64 /* Moya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,20 +52,12 @@
 		2831E1C722CDFA3700CB7415 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2831E1C822CDFA3700CB7415 /* RatingsView.swift */,
 				2831E1C922CDFA3700CB7415 /* ProfileView.swift */,
 				2831E1CA22CDFA3700CB7415 /* GamesView.swift */,
 				2831E1D222CE001200CB7415 /* ContentView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2831E1D622CE28CA00CB7415 /* Ratings */ = {
-			isa = PBXGroup;
-			children = (
-				2831E1C822CDFA3700CB7415 /* RatingsView.swift */,
-				2831E1D422CE28C400CB7415 /* RatingRow.swift */,
-			);
-			path = Ratings;
 			sourceTree = "<group>";
 		};
 		54487ACB22CDF5A9005F4C88 /* Auth */ = {
@@ -96,7 +88,6 @@
 		6A114CF622CDE54100DE4E5D /* PinpongSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				2831E1D622CE28CA00CB7415 /* Ratings */,
 				54487ACB22CDF5A9005F4C88 /* Auth */,
 				2831E1C722CDFA3700CB7415 /* Views */,
 				6A114CF722CDE54100DE4E5D /* AppDelegate.swift */,
@@ -133,6 +124,9 @@
 			dependencies = (
 			);
 			name = PinpongSwiftUI;
+			packageProductDependencies = (
+				6A5D65EE22CE17A1001EDD64 /* Moya */,
+			);
 			productName = PinpongSwiftUI;
 			productReference = 6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -161,6 +155,9 @@
 				Base,
 			);
 			mainGroup = 6A114CEB22CDE54100DE4E5D;
+			packageReferences = (
+				6A5D65ED22CE17A1001EDD64 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 6A114CF522CDE54100DE4E5D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -190,7 +187,6 @@
 			files = (
 				2831E1CD22CDFA3700CB7415 /* GamesView.swift in Sources */,
 				6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */,
-				2831E1D522CE28C400CB7415 /* RatingRow.swift in Sources */,
 				2831E1D322CE001200CB7415 /* ContentView.swift in Sources */,
 				6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */,
 				54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */,
@@ -390,6 +386,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6A5D65ED22CE17A1001EDD64 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6A5D65EE22CE17A1001EDD64 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6A5D65ED22CE17A1001EDD64 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6A114CEC22CDE54100DE4E5D /* Project object */;
 }
