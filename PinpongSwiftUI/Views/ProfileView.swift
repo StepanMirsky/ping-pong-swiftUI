@@ -11,16 +11,16 @@ import SwiftUI
 struct User {
     let name: String
     let rating: Int
-    let image: URL?
+    let image: UIImage
 }
 
 struct ProfileView : View {
-    var user: User = User.init(name: "Sergey", rating: 1000, image: nil)
+    var user: User = User.init(name: "Sergey", rating: 1000, image: UIImage(named: "defaultImage")!)
     
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
-                Image("defaultImage")
+                Image(uiImage: user.image)
                     .frame(width: 300, height: 300)
                     .aspectRatio(contentMode: .fill)
                     .clipShape(Circle())
