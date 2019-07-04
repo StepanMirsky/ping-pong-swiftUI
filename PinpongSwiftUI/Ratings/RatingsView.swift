@@ -8,11 +8,17 @@
 
 import SwiftUI
 
+struct ShortGame: Hashable {
+    let id = UUID()
+    let isWin: Bool
+}
+
 struct Rating: Hashable, Identifiable {
     let id = UUID()
     let name: String
     let value: Int
     let image: UIImage
+    let lastWins: [ShortGame]
 }
 
 struct RatingsList: View {
@@ -20,7 +26,9 @@ struct RatingsList: View {
     
     var body: some View {
         List(ratings) { rating in
-            NavigationLink(destination: ProfileView(user: User(name: rating.name, rating: rating.value, image: rating.image), isMe: false)) {
+            NavigationLink(
+                destination: ProfileView(user:
+                    User(name: rating.name, rating: rating.value, image: rating.image), isMe: false)) {
                 RatingRow(rating: rating)
             }
         }.listStyle(.grouped)
@@ -28,11 +36,55 @@ struct RatingsList: View {
 }
 
 struct RatingsView : View {
-    var ratings = [Rating(name: "Серега", value: 500, image: UIImage(named: "defaultImage")!),
-                   Rating(name: "Федя", value: 1000, image: UIImage(named: "personOne")!),
-                   Rating(name: "Антон", value: 1500, image: UIImage(named: "defaultImage")!),
-                   Rating(name: "Вика", value: 800, image: UIImage(named: "personTwo")!),
-                   Rating(name: "Гриша", value: 450, image: UIImage(named: "defaultImage")!)]
+    var ratings = [
+        Rating(
+            name: "Серега",
+            value: 500,
+            image: UIImage(named: "defaultImage")!,
+            lastWins: [
+                ShortGame(isWin: true),
+                ShortGame(isWin: false),
+                ShortGame(isWin: false)
+            ]
+        ),
+        Rating(
+            name: "Федя",
+            value: 1000,
+            image: UIImage(named: "personOne")!,
+            lastWins: [
+                ShortGame(isWin: true),
+                ShortGame(isWin: false),
+                ShortGame(isWin: false),
+                ShortGame(isWin: true),
+                ShortGame(isWin: true)
+            ]
+        ),
+        Rating(
+            name: "Антон",
+            value: 1500,
+            image: UIImage(named: "defaultImage")!,
+            lastWins: [
+                ShortGame(isWin: true),
+                ShortGame(isWin: true),
+                ShortGame(isWin: false),
+                ShortGame(isWin: true)
+            ]
+        ),
+        Rating(
+            name: "Вика",
+            value: 800,
+            image: UIImage(named: "personTwo")!,
+            lastWins: [
+                ShortGame(isWin: true),
+                ShortGame(isWin: false)            ]
+        ),
+        Rating(
+            name: "Гриша",
+            value: 450,
+            image: UIImage(named: "defaultImage")!,
+            lastWins: []
+        )
+    ]
     
     var body: some View {
         RatingsList(ratings: ratings)
