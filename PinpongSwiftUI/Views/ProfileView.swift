@@ -57,13 +57,14 @@ struct ProfileView : View {
                     .font(Font.system(.headline, design: .rounded))
                 LastGamesView(lastGames: user.lastGames)
                 if !isMe {
+                    //TODO: как вызвать метод gamesService.create()?
                     NavigationLink(destination: GameView(game: Game(homeUser: homeUser, awayUser: user, homeScore: 0, awayScore: 0, isFinished: false))) {
                         Text("Вызвать")
                             .font(.system(.headline, design: .rounded))
                     }
                 }
                 Spacer()
-                NavigationLink(destination: RegistrationView() ) {
+                NavigationLink(destination: GamesView(userName: user.name)) {
                     Text("Посмотреть все игры")
                 }
             }
