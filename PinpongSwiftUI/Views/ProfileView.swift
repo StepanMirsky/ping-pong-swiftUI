@@ -18,9 +18,9 @@ struct ProfileView : View {
             ShortGame(isWin: true)
         ]
     )
-    
+
     var isMe: Bool
-    
+
     var homeUser: User {
         return User(
             name: "Это я",
@@ -32,7 +32,7 @@ struct ProfileView : View {
             ]
         )
     }
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 20) {
