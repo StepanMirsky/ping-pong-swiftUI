@@ -18,7 +18,7 @@ enum PinpongRequest {
     case getGames
     case getGame(id: Int)
     case updateGame(id: Int)
-    case createGame
+    case createGame(awayUserName: String)
     case getUser(id: Int)
     case getUsers
     case createUser(Credentials)
@@ -72,8 +72,8 @@ extension PinpongRequest: TargetType {
                 parameters: ["login": credentials.login, "password": credentials.password],
                 encoding: JSONEncoding.default
             )
-        case .createGame:
-            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        case .createGame(let awayUserName):
+            return .requestParameters(parameters: ["away_user_name": awayUserName], encoding: JSONEncoding.default)
         case .updateGame(let id):
             return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
         }

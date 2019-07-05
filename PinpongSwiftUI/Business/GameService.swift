@@ -14,7 +14,7 @@ protocol GameService {
 
     func getGames(by userName: String, result: @escaping ResultClosure<[GameViewModel]>)
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>)
 
     func updateGame(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
 }
@@ -28,8 +28,6 @@ class GameServiceImpl: GameService {
         provider.request(.getGames) { requestResult in
             switch requestResult {
             case .success(let responce):
-                print(String(data: responce.data, encoding: .utf8))
-
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
 
@@ -55,10 +53,27 @@ class GameServiceImpl: GameService {
         }
     }
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            self.storage.games.append(game)
-            result(.success(game))
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>) {
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.createGame(awayUserName: awayUserName)) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
+                    result(.success(GameViewModel(game: game)))
+                }
+
+                if let error: ErrorModel = try? decoder.decode(
+                    ErrorModel.self,
+                    from: responce.data) {
+                    result(.failure(.textualError(error.errors.detail)))
+                }
+
+            default:
+                break
+            }
         }
     }
 
