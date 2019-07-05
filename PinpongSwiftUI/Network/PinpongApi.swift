@@ -13,11 +13,17 @@
 import Foundation
 import Moya
 
+struct UpdateGameParams {
+    let id: Int
+    let homeScore: Int
+    let awayScore: Int
+}
+
 enum PinpongRequest {
     case auth(Credentials)
     case getGames
     case getGame(id: Int)
-    case updateGame(id: Int)
+    case updateGame(params: UpdateGameParams)
     case createGame(awayUserName: String)
     case getUser(id: Int)
     case getUsers
@@ -39,8 +45,10 @@ extension PinpongRequest: TargetType {
             return "/games"
         case .createGame:
             return "/games/create"
-        case .getGame(let id), .updateGame(let id):
-            return "/gemes\(id)"
+        case .getGame(let id):
+            return "/games\(id)"
+        case .updateGame:
+            return "/update_score"
         case .getUser(let id):
             return "/users/\(id)"
         case .createUser:
@@ -54,12 +62,10 @@ extension PinpongRequest: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .getGames, .getGame(_), .getUser(_), .getUsers, .myProfile:
+        case .getGames, .getGame, .getUser, .getUsers, .myProfile:
             return .get
-        case .createGame, .createUser(_), .auth(_):
+        case .createGame, .createUser, .auth, .updateGame:
             return .post
-        case .updateGame(_):
-            return .put
         }
     }
     
@@ -74,8 +80,8 @@ extension PinpongRequest: TargetType {
             )
         case .createGame(let awayUserName):
             return .requestParameters(parameters: ["away_user_name": awayUserName], encoding: JSONEncoding.default)
-        case .updateGame(let id):
-            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        case .updateGame(let params):
+            return .requestParameters(parameters: ["id": params.id, "home_score": params.homeScore, "away_score": params.awayScore], encoding: JSONEncoding.default)
         }
         
     }
