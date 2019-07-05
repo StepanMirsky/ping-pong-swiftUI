@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GamesScoreView: View {
-    let game: Game
+    let game: GameViewModel
     
     var body: some View {
         ZStack {
@@ -37,7 +37,7 @@ struct GamesScoreView: View {
     }
 }
 
-private extension Game {
+private extension GameViewModel {
     var homeScoreColor: Color {
         return homeIsWinner ? .green : .red
     }

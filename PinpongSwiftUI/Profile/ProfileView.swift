@@ -9,29 +9,22 @@
 import SwiftUI
 
 struct ProfileView : View {
-    let userDefaults = UserDefaults.standard
-
-    var user: User = User(
-        name: "Sergey",
-        rating: 1000,
-        image: UIImage(named: "defaultImage")!,
-        lastGames: [
-            ShortGame(isWin: false),
-            ShortGame(isWin: true)
-        ]
-    )
-
+//    let userDefaults = UserDefaults.standard
+    
+    let userService: UserService = UserServiceImpl()
+    
+    @State var user: UserViewModel!
+    
     var isMe: Bool
-
-    var isAuthorized: Bool {
-        return userDefaults.string(forKey: "token") != nil
-    }
-
+    
+    @State var isAuthorized: Bool = UserDefaults.standard.string(forKey: "token") != nil
+    
+    
     var body: some View {
         ScrollView {
             
             VStack(alignment: .center, spacing: 20) {
-                if isAuthorized || !isMe {
+                if (isAuthorized || !isMe) && user != nil {
                     if isMe {
                         PresentationLink(destination: RegistrationView()) {
                             Image(uiImage: user.image)
@@ -64,12 +57,22 @@ struct ProfileView : View {
                         Text("Посмотреть все игры")
                             .font(.system(.headline, design: .rounded))
                     }
-                } else {
+                } else  {
                     PresentationLink(destination: LoginView()) {
                         Text("Войти или зарегистрироваться")
                             .font(.system(.headline, design: .rounded))
                     }
                 }
+            }
+                .onAppear {
+                    self.userService.getCurrentUser { (result) in
+                        switch result {
+                        case .success(let user):
+                            self.user = user
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
             }
         }
     }

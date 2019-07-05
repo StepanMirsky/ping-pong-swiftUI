@@ -16,23 +16,23 @@ enum APIError: Error {
 typealias ResultClosure<T> = (Result<T, APIError>) -> ()
 
 protocol UserService {
-    func getUsers(_ result: @escaping ResultClosure<[User]>)
+    func getUsers(_ result: @escaping ResultClosure<[UserViewModel]>)
 
-    func getCurrentUser(_ result: @escaping ResultClosure<User>)
+    func getCurrentUser(_ result: @escaping ResultClosure<UserViewModel>)
 }
 
 class UserServiceImpl: UserService {
     let storage = Storage.shared
     let userDefaults = UserDefaults.standard
 
-    func getUsers(_ result: @escaping ResultClosure<[User]>) {
+    func getUsers(_ result: @escaping ResultClosure<[UserViewModel]>) {
         
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             result(.success(self.storage.users))
         }
     }
 
-    func getCurrentUser(_ result: @escaping ResultClosure<User>) {
+    func getCurrentUser(_ result: @escaping ResultClosure<UserViewModel>) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             if let token = self.userDefaults.string(forKey: "token"),
                 let user = self.storage.users.first(where: { $0.name == token }) {

@@ -14,14 +14,14 @@ import Foundation
 import Moya
 
 enum PinpongRequest {
-    case auth(login: String, password: String)
+    case auth(Credentials)
     case getGames
     case getGame(id: Int)
     case updateGame(id: Int)
     case createGame
     case getUser(id: Int)
     case getUsers
-    case createUser
+    case createUser(Credentials)
     case myProfile
 }
 
@@ -56,7 +56,7 @@ extension PinpongRequest: TargetType {
         switch self {
         case .getGames, .getGame(_), .getUser(_), .getUsers, .myProfile:
             return .get
-        case .createGame, .createUser, .auth(_, _):
+        case .createGame, .createUser(_), .auth(_):
             return .post
         case .updateGame(_):
             return .put
@@ -67,11 +67,12 @@ extension PinpongRequest: TargetType {
         switch self {
         case .getGames, .getGame(_), .getUser(_), .getUsers, .myProfile:
             return .requestPlain
-        case .auth(let login, let password):
-            return .requestParameters(parameters: ["login": login, "password": password], encoding: JSONEncoding.default)
+        case .auth(let credentials), .createUser(let credentials):
+            return .requestParameters(
+                parameters: ["login": credentials.login, "password": credentials.password],
+                encoding: JSONEncoding.default
+            )
         case .createGame:
-            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
-        case .createUser:
             return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
         case .updateGame(let id):
             return .requestParameters(parameters: [:], encoding: JSONEncoding.default)

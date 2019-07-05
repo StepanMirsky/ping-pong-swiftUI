@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GamesProfileView: View {
-    let user: User
+    let user: UserViewModel
     let isHome: Bool
     var imageAligment: HorizontalAlignment {
         return isHome ? .leading : .trailing
