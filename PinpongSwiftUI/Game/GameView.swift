@@ -45,7 +45,7 @@ extension GameViewModel {
         self.homeScore = UInt(game.homeScore)
         self.awayUser = UserViewModel(from: game.awayUser)
         self.awayScore = UInt(game.awayScore)
-        self.isFinished = game.isFinished
+        self.isFinished = false
     }
 }
 

@@ -34,13 +34,6 @@ class GameServiceImpl: GameService {
                 if let games: [Game] = try? decoder.decode([Game].self, from: responce.data) {
                     result(.success(games.map({ GameViewModel(game: $0) })))
                 }
-
-                if let error: ErrorModel = try? decoder.decode(
-                    ErrorModel.self,
-                    from: responce.data) {
-                    result(.failure(.textualError(error.errors.detail)))
-                }
-                
             default:
                 break
             }
@@ -60,17 +53,9 @@ class GameServiceImpl: GameService {
             case .success(let responce):
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-
                 if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
                     result(.success(GameViewModel(game: game)))
                 }
-
-                if let error: ErrorModel = try? decoder.decode(
-                    ErrorModel.self,
-                    from: responce.data) {
-                    result(.failure(.textualError(error.errors.detail)))
-                }
-
             default:
                 break
             }

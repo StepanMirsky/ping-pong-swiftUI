@@ -14,5 +14,4 @@ struct Game: Decodable {
     let homeScore: Int
     let awayUser: User
     let awayScore: Int
-    let isFinished: Bool
 }
