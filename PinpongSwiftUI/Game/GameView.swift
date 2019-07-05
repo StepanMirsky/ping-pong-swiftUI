@@ -30,8 +30,9 @@ struct PlayerView : View {
     var body: some View {
         VStack(alignment: textAlignment) {
             Image(uiImage: user.image)
-                .frame(width: 125, height: 125)
+                .resizable()
                 .aspectRatio(contentMode: .fill)
+                .frame(width: 100, height: 100)
                 .clipShape(Circle())
             Text(user.name)
                     .font(.system(.title, design: .rounded))
@@ -45,6 +46,7 @@ struct PlayerView : View {
 struct ScoreView : View {
     let homeScore: UInt
     let awayScore: UInt
+    let isFinished: Bool
 
     var body: some View {
         ZStack {
@@ -53,11 +55,13 @@ struct ScoreView : View {
                     Spacer()
                     Text(String(homeScore))
                         .font(.system(size: 72))
+                        .color(isFinished ? (homeScore > awayScore ? .green : .red) : .black)
                 }
                 Spacer()
                 HStack {
                     Text(String(awayScore))
                         .font(.system(size: 72))
+                        .color(isFinished ? (awayScore > homeScore ? .green : .red) : .black)
                     Spacer()
                 }
             }
@@ -85,7 +89,7 @@ struct GameView : View {
                     PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
                 }.navigationBarTitle("Матч")
                 Divider()
-                ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
+                ScoreView(homeScore: game.homeScore, awayScore: game.awayScore, isFinished: game.isFinished)
                 Divider()
                 if game.isFinished {
                     VStack {

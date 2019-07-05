@@ -14,10 +14,12 @@ struct LastGamesView : View {
     var body: some View {
         HStack() {
             ForEach(lastGames.identified(by: \.id)) { game in
-                Image(uiImage: UIImage.from(color: game.isWin ? .green : .red))
+//                Image(uiImage: UIImage.from(color: game.isWin ? .green : .red))
+                Image(uiImage: UIImage(named: game.isWin ? "win" : "loose")!)
                     .resizable()
-                    .frame(width: 5, height: 5)
-                    .cornerRadius(2.0)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 15, height: 15)
+//                    .cornerRadius(2.0)
             }
         }
     }
@@ -30,6 +32,7 @@ struct RatingRow : View {
         HStack {
             Image(uiImage: user.image)
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 35, height: 35, alignment: .center)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 1))

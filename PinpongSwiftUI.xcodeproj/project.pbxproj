@@ -78,12 +78,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2831E1C722CDFA3700CB7415 /* Views */ = {
+		2831E1C722CDFA3700CB7415 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				2831E1C922CDFA3700CB7415 /* ProfileView.swift */,
 			);
-			path = Views;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		284E10BB22CE3356006E10CB /* Ratings */ = {
@@ -167,7 +167,7 @@
 				541D13C522CE17F700F5057F /* Game */,
 				284E10BB22CE3356006E10CB /* Ratings */,
 				54487ACB22CDF5A9005F4C88 /* Auth */,
-				2831E1C722CDFA3700CB7415 /* Views */,
+				2831E1C722CDFA3700CB7415 /* Profile */,
 				6A114CF722CDE54100DE4E5D /* AppDelegate.swift */,
 				6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */,
 				6A114CFD22CDE54100DE4E5D /* Assets.xcassets */,

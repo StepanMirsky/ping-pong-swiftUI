@@ -19,6 +19,7 @@ struct GamesProfileView: View {
         VStack(alignment: imageAligment) {
             Image(uiImage: user.image)
                 .resizable()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 50, height: 50, alignment: .center)
                 .clipShape(Circle())
                 .overlay(

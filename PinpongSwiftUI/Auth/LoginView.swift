@@ -13,7 +13,7 @@ struct LoginView : View {
     let userDefaults = UserDefaults.standard
 
     @Environment(\.isPresented) var isPresented: Binding<Bool>?
-
+    
     @State var login: String = ""
     @State var password: String = ""
     @State var error: Error?
@@ -51,6 +51,10 @@ struct LoginView : View {
                     .padding(16)
                 }
             }
+        }.onAppear{
+            print("Profile appeared")
+        }.onDisappear{
+            print("Profile disappeared")
         }
     }
 
@@ -64,6 +68,7 @@ struct LoginView : View {
             case .failure(let error):
                 self.error = error
             }
+            self.isPresented?.value = false
         }
     }
 }
