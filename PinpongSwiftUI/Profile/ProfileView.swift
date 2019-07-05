@@ -14,6 +14,12 @@ struct ProfileView : View {
 
     let userService: UserService = UserServiceImpl()
     let coordinator1 = Coordinator1()
+    @State var hide: Bool = false
+    
+    var imagePicker: ImagePickerView {
+        return ImagePickerView(delegate: coordinator1, dismissed: $hide)
+    }
+    
     @State var user: UserViewModel!
     @State var showingAlert: Bool = false
     @State var errorMessage: String = ""
@@ -24,17 +30,21 @@ struct ProfileView : View {
 
 
     var body: some View {
-
+        
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 20) {
                 if (isAuthorized || !isMe) && user != nil {
                     if isMe {
-                        PresentationLink(destination: ImagePickerView(delegate: coordinator1)) {
-                            Image(uiImage: user.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 300, height: 300)
-                                .clipShape(Circle())
+                        Image(uiImage: user.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 300, height: 300)
+                            .clipShape(Circle())
+                        
+                        PresentationLink(destination: imagePicker) {
+                            Text("Изменить фото")
+                                .color(Color.ratingColor(user.rating))
+                                .font(Font.system(.headline, design: .rounded))
                         }
                     } else {
                         Image(uiImage: user.image)
@@ -69,9 +79,11 @@ struct ProfileView : View {
                 }
             }
             .onAppear {
-                  self.coordinator1.successImagePicked = { image in
-                        self.user.image = image
-                        }
+                self.coordinator1.successImagePicked = { image in
+//                    self.imagePicker.dismissed = true
+                    self.hide = true
+                    self.user.image = image
+                }
                 if self.user == nil {
                     self.userService.getCurrentUser { (result) in
                         switch result {
@@ -99,6 +111,7 @@ class Coordinator1: NSObject, UIImagePickerControllerDelegate, UINavigationContr
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             successImagePicked?(pickedImage)
         }
+        
     }
 
 }

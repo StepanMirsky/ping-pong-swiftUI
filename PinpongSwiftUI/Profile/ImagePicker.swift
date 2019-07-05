@@ -11,8 +11,8 @@ import UIKit
 import SwiftUI
 
 private struct ImagePickerViewController: UIViewControllerRepresentable {
-    
     var delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate
+    @Binding var dismissed: Bool
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePickerViewController>) -> UIImagePickerController {
         let pickerController = UIImagePickerController()
@@ -20,23 +20,25 @@ private struct ImagePickerViewController: UIViewControllerRepresentable {
         return pickerController
     }
     
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePickerViewController>) {
+        if dismissed {
+            uiViewController.dismiss(animated: true)
+        }
     }
     
     typealias UIViewControllerType = UIImagePickerController
-    
-
-    
 }
 
 
 
 struct ImagePickerView: View {
-    let delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate //= Coordinator1()
+    
+    let delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate
+    @Binding var dismissed: Bool
+//    @Environment(\.isPresented) var isPresented: Binding<Bool>?
     
     var body: some View {
-        ImagePickerViewController(delegate: delegate)
-        
+        return ImagePickerViewController(delegate: delegate, dismissed: $dismissed)
     }
-    
 }
