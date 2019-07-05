@@ -35,14 +35,16 @@ struct ProfileView : View {
                     if isMe {
                         PresentationLink(destination: RegistrationView()) {
                             Image(uiImage: user.image)
-                                .frame(width: 300, height: 300)
+                                .resizable()
                                 .aspectRatio(contentMode: .fill)
+                                .frame(width: 300, height: 300)
                                 .clipShape(Circle())
                         }
                     } else {
                         Image(uiImage: user.image)
-                            .frame(width: 300, height: 300)
+                            .resizable()
                             .aspectRatio(contentMode: .fill)
+                            .frame(width: 300, height: 300)
                             .clipShape(Circle())
                     }
                     Text(user.name)
