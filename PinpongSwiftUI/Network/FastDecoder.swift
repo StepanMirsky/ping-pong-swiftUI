@@ -17,3 +17,7 @@ struct FastDecoder {
         return try! decoder.decode(T.self, from: data)
     }
 }
+
+struct PinpongResponse<T: Decodable>: Decodable {
+    let data: T
+}

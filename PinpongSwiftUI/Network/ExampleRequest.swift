@@ -16,7 +16,7 @@ struct ExampleRequest {
         provider.request(.getUser(id: 5)) { result in
             switch result {
             case .success(let responce):
-                let someObj: DecodableObj = FastDecoder.decode(responce.data)
+                let someObj: PinpongResponse<DecodableObj> = FastDecoder.decode(responce.data)
             //do something
             default:
                 break

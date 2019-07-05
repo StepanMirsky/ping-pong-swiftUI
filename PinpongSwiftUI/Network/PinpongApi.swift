@@ -27,7 +27,7 @@ enum PinpongRequest {
 
 extension PinpongRequest: TargetType {
     var baseURL: URL {
-        return URL(string: "https://young-wave-17813.herokuapp.com")!
+        return URL(string: "https://young-wave-17813.herokuapp.com/api")!
         
     }
     
