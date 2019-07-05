@@ -78,8 +78,7 @@ struct RegistrationView : View {
         let credentials = Credentials(login: login, password: password)
         authService.register(credentials) { result in
             switch result {
-            case .success(let token):
-                self.userDefaults.set(token, forKey: "token")
+            case .success(let id):
                 self.isPresented?.value = false
             case .failure:
                 break
