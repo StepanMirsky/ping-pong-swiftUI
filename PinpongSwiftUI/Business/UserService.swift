@@ -26,6 +26,7 @@ class UserServiceImpl: UserService {
     let userDefaults = UserDefaults.standard
 
     func getUsers(_ result: @escaping ResultClosure<[User]>) {
+        
         DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             result(.success(self.storage.users))
         }

@@ -22,6 +22,7 @@ enum PinpongRequest {
     case getUser(id: Int)
     case getUsers
     case createUser
+    case myProfile
 }
 
 extension PinpongRequest: TargetType {
@@ -46,12 +47,14 @@ extension PinpongRequest: TargetType {
             return "/users/registration"
         case .getUsers:
             return "/users"
+        case .myProfile:
+            return "/users/me"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getGames, .getGame(_), .getUser(_), .getUsers:
+        case .getGames, .getGame(_), .getUser(_), .getUsers, .myProfile:
             return .get
         case .createGame, .createUser, .auth(_, _):
             return .post
@@ -61,7 +64,19 @@ extension PinpongRequest: TargetType {
     }
     
     var task: Task {
-        return .requestPlain // Поправить
+        switch self {
+        case .getGames, .getGame(_), .getUser(_), .getUsers, .myProfile:
+            return .requestPlain
+        case .auth(let login, let password):
+            return .requestParameters(parameters: ["login": login, "password": password], encoding: JSONEncoding.default)
+        case .createGame:
+            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        case .createUser:
+            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        case .updateGame(let id):
+            return .requestParameters(parameters: [:], encoding: JSONEncoding.default)
+        }
+        
     }
     
     var sampleData: Data {

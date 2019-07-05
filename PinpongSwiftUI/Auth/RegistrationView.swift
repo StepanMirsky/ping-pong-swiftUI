@@ -19,7 +19,7 @@ struct RegistrationView : View {
     }
 
     @Environment(\.isPresented) var isPresented: Binding<Bool>?
-
+    
     @State var login: String = ""
     @State var password: String = ""
     @State var passwordConfirm: String = ""
@@ -50,10 +50,15 @@ struct RegistrationView : View {
             }
             Button("Зарегистрироваться") {
                 self.register()
+                
             }
                 .padding(16)
                 .disabled(passwordsMatch != .equal)
                 .font(.system(.headline, design: .rounded))
+        }.onAppear{
+            print("Profile appeared")
+        }.onDisappear{
+            print("Profile disappeared")
         }
     }
 
