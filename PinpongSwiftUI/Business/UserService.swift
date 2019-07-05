@@ -45,14 +45,16 @@ class UserServiceImpl: UserService {
         provider.request(.myProfile) { requestResult in
             switch requestResult {
             case .success(let responce):
-                print(String.init(data: responce.data, encoding: .utf8))
+                if let userDataResponse: UserDataResponse = try? JSONDecoder().decode(UserDataResponse.self, from: responce.data) {
+                    result(.success(UserViewModel(from: userDataResponse.data)))
+                }
                 
-                if let someObj: DecodableObj? = try? FastDecoder.decode(responce.data) {
-//                    result(.success(so))
+                if let error: ErrorModel = try? JSONDecoder().decode(
+                    ErrorModel.self,
+                    from: responce.data) {
+                    result(.failure(.textualError(error.errors.detail)))
                 }
-                if let error: ErrorModel? = try? FastDecoder.decode(responce.data) {
-                    result(.failure(.textualError(error?.errors.detail ?? "")))
-                }
+                
                 
             //do something
             case .failure(let error):
