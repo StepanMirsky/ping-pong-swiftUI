@@ -16,6 +16,9 @@
 		54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD022CDF5D8005F4C88 /* LoginView.swift */; };
 		54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54487AD122CDF5D8005F4C88 /* RegistrationView.swift */; };
 		54D2E13122CE5FB60067EB5E /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13022CE5FB60067EB5E /* Storage.swift */; };
+		54D2E13322CE87850067EB5E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13222CE87850067EB5E /* UserService.swift */; };
+		54D2E13522CE87960067EB5E /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13422CE87960067EB5E /* GameService.swift */; };
+		54D2E13722CE88520067EB5E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13622CE88520067EB5E /* AuthService.swift */; };
 		6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF722CDE54100DE4E5D /* AppDelegate.swift */; };
 		6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */; };
 		6A114CFE22CDE54100DE4E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A114CFD22CDE54100DE4E5D /* Assets.xcassets */; };
@@ -24,6 +27,10 @@
 		6A5D65F522CE68AC001EDD64 /* GamesProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D65F422CE68AC001EDD64 /* GamesProfileView.swift */; };
 		6A5D65F722CE68C9001EDD64 /* GamesScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D65F622CE68C9001EDD64 /* GamesScoreView.swift */; };
 		6A5D65FA22CE68F4001EDD64 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D65F922CE68F4001EDD64 /* HistoryRow.swift */; };
+		6A5D65FE22CF1CD6001EDD64 /* PinpongApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D65FD22CF1CD6001EDD64 /* PinpongApi.swift */; };
+		6A5D660022CF1D06001EDD64 /* FastDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D65FF22CF1D06001EDD64 /* FastDecoder.swift */; };
+		6A5D660222CF24D0001EDD64 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D660122CF24D0001EDD64 /* Date+Formatter.swift */; };
+		6A5D660422CF24FA001EDD64 /* ExampleRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D660322CF24FA001EDD64 /* ExampleRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +44,9 @@
 		54487AD122CDF5D8005F4C88 /* RegistrationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		548D0A6322CE11A6006B8C37 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		54D2E13022CE5FB60067EB5E /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		54D2E13222CE87850067EB5E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		54D2E13422CE87960067EB5E /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
+		54D2E13622CE88520067EB5E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinpongSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A114CF722CDE54100DE4E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +56,10 @@
 		6A5D65F422CE68AC001EDD64 /* GamesProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesProfileView.swift; sourceTree = "<group>"; };
 		6A5D65F622CE68C9001EDD64 /* GamesScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesScoreView.swift; sourceTree = "<group>"; };
 		6A5D65F922CE68F4001EDD64 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
+		6A5D65FD22CF1CD6001EDD64 /* PinpongApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinpongApi.swift; sourceTree = "<group>"; };
+		6A5D65FF22CF1D06001EDD64 /* FastDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastDecoder.swift; sourceTree = "<group>"; };
+		6A5D660122CF24D0001EDD64 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
+		6A5D660322CF24FA001EDD64 /* ExampleRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				54D2E13022CE5FB60067EB5E /* Storage.swift */,
+				54D2E13222CE87850067EB5E /* UserService.swift */,
+				54D2E13622CE88520067EB5E /* AuthService.swift */,
+				54D2E13422CE87960067EB5E /* GameService.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -130,6 +147,7 @@
 		6A114CF622CDE54100DE4E5D /* PinpongSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				6A5D65FC22CF1CB4001EDD64 /* Network */,
 				6A5D65F322CE6898001EDD64 /* Games */,
 				54D2E12F22CE5F7F0067EB5E /* Business */,
 				541D13C522CE17F700F5057F /* Game */,
@@ -179,6 +197,17 @@
 				6A5D65F622CE68C9001EDD64 /* GamesScoreView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6A5D65FC22CF1CB4001EDD64 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6A5D65FD22CF1CD6001EDD64 /* PinpongApi.swift */,
+				6A5D65FF22CF1D06001EDD64 /* FastDecoder.swift */,
+				6A5D660122CF24D0001EDD64 /* Date+Formatter.swift */,
+				6A5D660322CF24FA001EDD64 /* ExampleRequest.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,19 +287,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54D2E13322CE87850067EB5E /* UserService.swift in Sources */,
 				2831E1CD22CDFA3700CB7415 /* GamesView.swift in Sources */,
 				6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */,
 				6A5D65FA22CE68F4001EDD64 /* HistoryRow.swift in Sources */,
+				6A5D660022CF1D06001EDD64 /* FastDecoder.swift in Sources */,
 				6A5D65F522CE68AC001EDD64 /* GamesProfileView.swift in Sources */,
 				284E10BF22CE3356006E10CB /* RatingRow.swift in Sources */,
 				6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */,
+				6A5D660422CF24FA001EDD64 /* ExampleRequest.swift in Sources */,
 				541D13C722CE184C00F5057F /* GameView.swift in Sources */,
 				54487AD222CDF5D8005F4C88 /* LoginView.swift in Sources */,
 				54487AD322CDF5D8005F4C88 /* RegistrationView.swift in Sources */,
 				2831E1CC22CDFA3700CB7415 /* ProfileView.swift in Sources */,
 				284E10BE22CE3356006E10CB /* RatingsView.swift in Sources */,
+				54D2E13522CE87960067EB5E /* GameService.swift in Sources */,
 				54D2E13122CE5FB60067EB5E /* Storage.swift in Sources */,
 				6A5D65F722CE68C9001EDD64 /* GamesScoreView.swift in Sources */,
+				54D2E13722CE88520067EB5E /* AuthService.swift in Sources */,
+				6A5D660222CF24D0001EDD64 /* Date+Formatter.swift in Sources */,
+				6A5D65FE22CF1CD6001EDD64 /* PinpongApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

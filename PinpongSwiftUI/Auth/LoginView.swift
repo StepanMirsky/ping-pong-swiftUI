@@ -9,8 +9,12 @@
 import SwiftUI
 
 struct LoginView : View {
+    let authService: AuthService = AuthServiceImpl()
+    let userDefaults = UserDefaults.standard
+
     @State var login: String = ""
     @State var password: String = ""
+    @State var error: Error?
 
     var body: some View {
         VStack {
@@ -24,13 +28,17 @@ struct LoginView : View {
                 .font(.system(.subheadline, design: .rounded))
             SecureField("", text: $password)
                 .textFieldStyle(.roundedBorder)
-                .padding(.horizontal,16)
+                .padding(.horizontal, 16)
+            Text(error?.localizedDescription ?? "")
+                .font(.system(.subheadline, design: .rounded))
+                .color(.red)
             HStack {
                 Button("Войти") {
                     self.signin()
                 }
                     .padding(16)
                     .font(.system(.headline, design: .rounded))
+                    .disabled(password.isEmpty)
                 
                 NavigationLink(destination: RegistrationView()) {
                     Text("Зарегистрироваться")
@@ -43,7 +51,16 @@ struct LoginView : View {
     }
 
     func signin() {
-        print("Логин: \(login), Пароль: \(password)")
+        let credentials = Credentials(login: login, password: password)
+        authService.login(credentials) { result in
+            switch result {
+            case .success(let token):
+                self.userDefaults.set(token, forKey: "token")
+                //TODO: Как закрыть жкран???
+            case .failure(let error):
+                self.error = error
+            }
+        }
     }
 }
 

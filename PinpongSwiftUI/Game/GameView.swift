@@ -68,51 +68,88 @@ struct ScoreView : View {
 }
 
 struct GameView : View {
-    @State var game: Game
+    let gameService: GameService = GameServiceImpl()
+    let userService: UserService = UserServiceImpl()
+
+    @State var game: Game!
+    var awayUser: User?
 
     var body: some View {
         VStack {
-            HStack {
-                PlayerView(user: game.homeUser, textAlignment: .leading).padding(.leading, 24)
-                Spacer()
-                Divider()
-                Spacer()
-                PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
-            }.navigationBarTitle("Игра")
-            Divider()
-            ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
-            Divider()
-            if game.isFinished {
-                VStack {
-                    Text("Победитель")
-                        .font(.system(.largeTitle, design: .rounded))
-                    PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
-                }
-            } else {
+            if game != nil {
                 HStack {
-                    Button(action: {
-                        self.addScore(to: true)
-                    }) {
-                        Image("defaultImage")
-                            .frame(width: 150, height: 150)
-                            .aspectRatio(contentMode: .fill)
-                            .cornerRadius(20)
-                    }.padding(16)
+                    PlayerView(user: game.homeUser, textAlignment: .leading).padding(.leading, 24)
+                    Spacer()
                     Divider()
-                    Button(action: {
-                        self.addScore(to: false)
-                    }) {
-                        Image("defaultImage")
-                            .frame(width: 150, height: 150)
-                            .aspectRatio(contentMode: .fill)
-                            .cornerRadius(20)
-                    }.padding(16)
+                    Spacer()
+                    PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
+                }.navigationBarTitle("Матч")
+                Divider()
+                ScoreView(homeScore: game.homeScore, awayScore: game.awayScore)
+                Divider()
+                if game.isFinished {
+                    VStack {
+                        Text("Победитель")
+                            .font(.system(.largeTitle, design: .rounded))
+                        PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
+                    }
+                } else {
+                    HStack {
+                        Button(action: {
+                            self.addScore(to: true)
+                        }) {
+                            Rectangle()
+                                .frame(width: 150, height: 150)
+                                .cornerRadius(20)
+                                .foregroundColor(.green)
+                        }.padding(16)
+                        Divider()
+                        Button(action: {
+                            self.addScore(to: false)
+                        }) {
+                            Rectangle()
+                                .frame(width: 150, height: 150)
+                                .cornerRadius(20)
+                                .foregroundColor(.blue)
+                        }.padding(16)
+                    }
                 }
+                Spacer()
             }
-            Spacer()
+        }.onAppear {
+            self.viewAppeared()
         }
     }
 
+    func viewAppeared() {
+        guard let awayUser = awayUser else {
+            return
+        }
+
+        userService.getCurrentUser { result in
+            switch result {
+            case .success(let homeUser):
+                let game = Game(
+                    homeUser: homeUser,
+                    awayUser: awayUser,
+                    homeScore: 0,
+                    awayScore: 0,
+                    isFinished: false
+                )
+                self.gameService.create(game) { result in
+                    switch result {
+                    case .success(let game):
+                        self.game = game
+                    case .failure:
+                        break
+                    }
+                }
+            case .failure:
+                break
+            }
+        }
+    }
+    
     func addScore(to isHome: Bool) {
         if isHome {
             game.homeScore += 1
@@ -120,6 +157,7 @@ struct GameView : View {
             game.awayScore += 1
         }
         endGameIfNeeded()
+        gameService.updateGame(game) { _ in }
     }
 
     func endGameIfNeeded() {
