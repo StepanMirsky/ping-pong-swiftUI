@@ -14,7 +14,7 @@ struct Credentials {
 }
 
 protocol AuthService {
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>)
+    func register(_ credentials: Credentials, result: @escaping ResultClosure<String>)
 
     func login(_ credentials: Credentials, result: @escaping ResultClosure<String>)
 }
@@ -22,26 +22,27 @@ protocol AuthService {
 class AuthServiceImpl: AuthService {
     let storage = Storage.shared
 
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>) {
+    func register(_ credentials: Credentials, result: @escaping ResultClosure<String>) {
         let provider = MoyaProvider<PinpongRequest>()
         provider.request(.createUser(credentials)) { result in
             switch result {
-            case .success(let responce):
-                let someObj: DecodableObj = FastDecoder.decode(responce.data)
-            //do something
+            case .success(let response):
+                let someObj: DecodableObj = FastDecoder.decode(response.data)
             default:
                 break
             }
         }
-    }
+    }   
 
     func login(_ credentials: Credentials, result: @escaping ResultClosure<String>) {
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-//            if self.storage.users.lazy.filter({ $0.name == credentials.login }).isEmpty {
-//                result(.failure(.textualError("Неправильный логин или пароль")))
-//            } else {
-//                result(.success(credentials.login))
-//            }
-//        }
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.auth(credentials)) { result in
+            switch result {
+            case .success(let response):
+                let someObj: DecodableObj = FastDecoder.decode(response.data)
+            default:
+                break
+            }
+        }
     }
 }

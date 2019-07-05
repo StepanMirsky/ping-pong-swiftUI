@@ -81,44 +81,47 @@ struct GameView : View {
     var body: some View {
         VStack {
             if game != nil {
-                HStack {
-                    PlayerView(user: game.homeUser, textAlignment: .leading).padding(.leading, 24)
-                    Spacer()
-                    Divider()
-                    Spacer()
-                    PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
-                }.navigationBarTitle("Матч")
-                Divider()
-                ScoreView(homeScore: game.homeScore, awayScore: game.awayScore, isFinished: game.isFinished)
-                Divider()
-                if game.isFinished {
-                    VStack {
-                        Text("Победитель")
-                            .font(.system(.largeTitle, design: .rounded))
-                        PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
-                    }
-                } else {
+                ScrollView(showsIndicators: false) {
                     HStack {
-                        Button(action: {
-                            self.addScore(to: true)
-                        }) {
-                            Rectangle()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(20)
-                                .foregroundColor(.green)
-                        }.padding(16)
+                        PlayerView(user: game.homeUser, textAlignment: .leading).padding(.leading, 24)
+                        Spacer()
                         Divider()
-                        Button(action: {
-                            self.addScore(to: false)
-                        }) {
-                            Rectangle()
-                                .frame(width: 150, height: 150)
-                                .cornerRadius(20)
-                                .foregroundColor(.blue)
-                        }.padding(16)
+                        Spacer()
+                        PlayerView(user: game.awayUser, textAlignment: .trailing).padding(.trailing, 24)
+                    }.navigationBarTitle("Матч")
+                    Divider()
+                    ScoreView(homeScore: game.homeScore, awayScore: game.awayScore, isFinished: game.isFinished)
+                    Divider()
+                    if game.isFinished {
+                        VStack {
+                            Text("Победитель")
+                                .font(.system(.largeTitle, design: .rounded))
+                            PlayerView(user: game.homeIsWinner ? game.homeUser : game.awayUser, textAlignment: .center)
+                        }
+                    } else {
+                        HStack {
+                            Button(action: {
+                                self.addScore(to: true)
+                            }) {
+                                Rectangle()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(20)
+                                    .foregroundColor(.green)
+                            }.padding(16)
+                            Divider()
+                            Button(action: {
+                                self.addScore(to: false)
+                            }) {
+                                Rectangle()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(20)
+                                    .foregroundColor(.blue)
+                            }.padding(16)
+                        }
                     }
                 }
-                Spacer()
+            } else {
+                ActivityIndicator(isAnimating: .constant(true), style: .large)
             }
         }.onAppear {
             self.viewAppeared()
