@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct ProfileView : View {
 //    let userDefaults = UserDefaults.standard
     
     let userService: UserService = UserServiceImpl()
-    
+    let coordinator1 = Coordinator1()
     @State var user: UserViewModel!
     @State var showingAlert: Bool = false
     @State var errorMessage: String = ""
@@ -23,11 +24,12 @@ struct ProfileView : View {
     
     
     var body: some View {
+        
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center, spacing: 20) {
                 if (isAuthorized || !isMe) && user != nil {
                     if isMe {
-                        PresentationLink(destination: RegistrationView()) {
+                        PresentationLink(destination: ImagePickerView(delegate: coordinator1)) {
                             Image(uiImage: user.image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
@@ -59,13 +61,18 @@ struct ProfileView : View {
                             .font(.system(.headline, design: .rounded))
                     }
                 } else  {
-                    PresentationLink(destination: LoginView()) {
+//
+                    PresentationLink(destination: LoginView() ) {
                         Text("Войти или зарегистрироваться")
                             .font(.system(.headline, design: .rounded))
                     }
                 }
             }
             .onAppear {
+                self.coordinator1.successImagePicked = { image in
+                    self.user.image = image
+                }
+                
                 self.userService.getCurrentUser { (result) in
                     switch result {
                     case .success(let user):
@@ -78,4 +85,19 @@ struct ProfileView : View {
             }
         }
     }
+}
+
+class Coordinator1: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var successImagePicked: ((UIImage) -> Void)?
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        print("cancell")
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            successImagePicked?(pickedImage)
+        }
+    }
+    
 }
