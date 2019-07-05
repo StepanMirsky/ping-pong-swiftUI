@@ -41,8 +41,19 @@ class GameServiceImpl: GameService {
     }
 
     func getGames(by userName: String, result: @escaping ResultClosure<[GameViewModel]>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            result(.success(self.storage.games.filter({ $0.homeUser.name == userName || $0.awayUser.name == userName })))
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.getGames) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                if let games: [Game] = try? decoder.decode([Game].self, from: responce.data) {
+                    result(.success(games.filter({ $0.homeUser.login == userName || $0.awayUser.login == userName }).map({ GameViewModel(game: $0) })))
+                }
+            default:
+                break
+            }
         }
     }
 
