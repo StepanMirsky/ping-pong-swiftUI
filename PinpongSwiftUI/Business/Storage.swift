@@ -64,43 +64,5 @@ class Storage {
                 lastGames: []
             )
         ]
-
-        games = [
-            GameViewModel(
-                homeUser: users[0],
-                awayUser: users[1],
-                homeScore: 5,
-                awayScore: 3,
-                isFinished: false
-            ),
-            GameViewModel(
-                homeUser: users[1],
-                awayUser: users[2],
-                homeScore: 11,
-                awayScore: 3,
-                isFinished: true
-            ),
-            GameViewModel(
-                homeUser: users[2],
-                awayUser: users[3],
-                homeScore: 5,
-                awayScore: 11,
-                isFinished: true
-            ),
-            GameViewModel(
-                homeUser: users[2],
-                awayUser: users[0],
-                homeScore: 11,
-                awayScore: 7,
-                isFinished: true
-            ),
-            GameViewModel(
-                homeUser: users[3],
-                awayUser: users[1],
-                homeScore: 15,
-                awayScore: 13,
-                isFinished: true
-            )
-        ]
     }
 }

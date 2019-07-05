@@ -24,15 +24,25 @@ class GameServiceImpl: GameService {
     let userDefaults = UserDefaults.standard
 
     func getGames(_ result: @escaping ResultClosure<[GameViewModel]>) {
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-//            result(.success(self.storage.games))
-//        }
         let provider = MoyaProvider<PinpongRequest>()
-        provider.request(.getGames) { result in
-            switch result {
+        provider.request(.getGames) { requestResult in
+            switch requestResult {
             case .success(let responce):
-                let someObj: DecodableObj = FastDecoder.decode(responce.data)
-            //do something
+                print(String(data: responce.data, encoding: .utf8))
+
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                if let games: [Game] = try? decoder.decode([Game].self, from: responce.data) {
+                    result(.success(games.map({ GameViewModel(game: $0) })))
+                }
+
+                if let error: ErrorModel = try? decoder.decode(
+                    ErrorModel.self,
+                    from: responce.data) {
+                    result(.failure(.textualError(error.errors.detail)))
+                }
+                
             default:
                 break
             }
