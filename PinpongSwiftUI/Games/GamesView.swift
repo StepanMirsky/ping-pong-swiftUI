@@ -22,25 +22,33 @@ struct GamesView : View {
         }
         .listStyle(.grouped)
             .onAppear {
-                if let userName = self.userName {
-                    self.gameService.getGames(by: userName) { result in
-                        switch result {
-                        case .success(let games):
-                            self.games = games
-                        case .failure:
-                            break
-                        }
-                    }
-                } else {
-                    self.gameService.getGames { result in
-                        switch result {
-                        case .success(let games):
-                            self.games = games
-                        case .failure:
-                            break
-                        }
-                    }
+                self.load()
+        }.navigationBarItems(
+            trailing: Button("Обновить") {
+                self.load()
+            }
+        ).navigationBarTitle(Text("Игры"))
+    }
+
+    func load() {
+        if let userName = self.userName {
+            self.gameService.getGames(by: userName) { result in
+                switch result {
+                case .success(let games):
+                    self.games = games
+                case .failure:
+                    break
                 }
+            }
+        } else {
+            self.gameService.getGames { result in
+                switch result {
+                case .success(let games):
+                    self.games = games
+                case .failure:
+                    break
+                }
+            }
         }
     }
 }

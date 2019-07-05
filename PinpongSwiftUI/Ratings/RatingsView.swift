@@ -48,6 +48,7 @@ struct RatingsList: View {
                 RatingRow(user: user)
             }
         }.listStyle(.grouped)
+
     }
 }
 
@@ -59,14 +60,22 @@ struct RatingsView : View {
     var body: some View {
         RatingsList(users: users)
             .onAppear {
-                self.userService.getUsers { result in
-                    switch result {
-                    case .success(let users):
-                        self.users = users
-                    case .failure:
-                        break
+                self.load()
+                }.navigationBarItems(
+                    trailing: Button("Обновить") {
+                        self.load()
                     }
-                }
+        ).navigationBarTitle(Text("Рейтинги"))
+    }
+
+    func load() {
+        self.userService.getUsers { result in
+            switch result {
+            case .success(let users):
+                self.users = users
+            case .failure:
+                break
+            }
         }
     }
 }
