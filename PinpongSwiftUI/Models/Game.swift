@@ -8,6 +8,10 @@
 
 import Foundation
 
-struct Game {
+struct Game: Decodable {
     let id: Int
+    let homeUser: User
+    let homeScore: Int
+    let awayUser: User
+    let awayScore: Int
 }
