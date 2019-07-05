@@ -11,11 +11,11 @@ import UIKit
 
 struct ProfileView : View {
     let userService: UserService = UserServiceImpl()
-    let coordinator1 = Coordinator1()
+    let coordinator = Coordinator1()
     @State var hide: Bool = false
     
     var imagePicker: ImagePickerView {
-        return ImagePickerView(delegate: coordinator1, dismissed: $hide)
+        return ImagePickerView(delegate: coordinator, dismissed: $hide)
     }
     
     @State var user: UserViewModel!
@@ -76,11 +76,11 @@ struct ProfileView : View {
                 }
             }
             .onAppear {
-                self.coordinator1.successImagePicked = { image in
+                self.coordinator.successImagePicked = { image in
                     self.hide = true
                     self.user.image = image
                 }
-                self.coordinator1.cancellPicker = {
+                self.coordinator.cancellPicker = {
                      self.hide = true
                 }
                 
@@ -100,6 +100,7 @@ struct ProfileView : View {
     }
 }
 
+//MARK: UIImagePickerControllerDelegate
 class Coordinator1: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var successImagePicked: ((UIImage) -> Void)?
     var cancellPicker: (()-> Void)?
@@ -112,7 +113,5 @@ class Coordinator1: NSObject, UIImagePickerControllerDelegate, UINavigationContr
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             successImagePicked?(pickedImage)
         }
-        
     }
-
 }
