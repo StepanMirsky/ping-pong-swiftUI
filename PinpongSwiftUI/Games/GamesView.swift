@@ -41,7 +41,11 @@ struct GamesView : View {
                 HistoryRow(game: game)
             }
         }.listStyle(.grouped)
-        
     }
 }
+
+//NavigationLink(destination: GameView(game: Game(homeUser: homeUser, awayUser: user, homeScore: 0, awayScore: 0, isFinished: false))) {
+//    Text("Вызвать")
+//        .font(.system(.headline, design: .rounded))
+//}
 
