@@ -181,11 +181,25 @@ struct GameView : View {
     func endGameIfNeeded() {
         if game.homeScore >= 11 && game.homeScore > game.awayScore && game.homeScore - game.awayScore >= 2 {
             game.isFinished = true
-            gameService.updateGame(game) { _ in }
+            gameService.updateGame(game) { result in
+                switch result {
+                case .success(let game):
+                    self.game = game
+                case .failure:
+                    break
+                }
+            }
         }
         if game.awayScore >= 11 && game.awayScore > game.homeScore && game.awayScore - game.homeScore >= 2 {
             game.isFinished = true
-            gameService.updateGame(game) { _ in }
+            gameService.updateGame(game) { result in
+                switch result {
+                case .success(let game):
+                    self.game = game
+                case .failure:
+                    break
+                }
+            }
         }
     }
 }
