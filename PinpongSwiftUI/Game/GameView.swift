@@ -30,8 +30,9 @@ struct PlayerView : View {
     var body: some View {
         VStack(alignment: textAlignment) {
             Image(uiImage: user.image)
-                .frame(width: 125, height: 125)
+                .resizable()
                 .aspectRatio(contentMode: .fill)
+                .frame(width: 125, height: 125)
                 .clipShape(Circle())
             Text(user.name)
                     .font(.system(.title, design: .rounded))

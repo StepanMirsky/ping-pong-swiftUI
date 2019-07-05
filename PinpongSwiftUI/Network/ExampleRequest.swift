@@ -13,7 +13,7 @@ import Moya
 struct ExampleRequest {
     func test() {
         let provider = MoyaProvider<PinpongRequest>()
-        provider.request(.showUser(id: 123)) { result in
+        provider.request(.getUser(id: 5)) { result in
             switch result {
             case .success(let responce):
                 let someObj: DecodableObj = FastDecoder.decode(responce.data)
