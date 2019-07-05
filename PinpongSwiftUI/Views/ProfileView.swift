@@ -53,7 +53,7 @@ struct ProfileView : View {
                         .color(Color.ratingColor(user.rating))
                         .font(Font.system(.headline, design: .rounded))
                     LastGamesView(lastGames: user.lastGames)
-                    if !isMe {
+                    if !isMe && isAuthorized {
                         NavigationLink(destination: GameView(game: nil, awayUser: self.user)) {
                             Text("Вызвать")
                                 .font(.system(.headline, design: .rounded))

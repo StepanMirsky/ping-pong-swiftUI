@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct RegistrationView : View {
+    let authService: AuthService = AuthServiceImpl()
+    let userDefaults = UserDefaults.standard
+
     enum PasswordMatch {
         case equal
         case notEqual
@@ -16,6 +19,7 @@ struct RegistrationView : View {
     }
 
     @Environment(\.isPresented) var isPresented: Binding<Bool>?
+    
     @State var login: String = ""
     @State var password: String = ""
     @State var passwordConfirm: String = ""
@@ -71,8 +75,16 @@ struct RegistrationView : View {
     }
 
     func register() {
-        print("Логин: \(login), Пароль: \(password)")
-        
+        let credentials = Credentials(login: login, password: password)
+        authService.register(credentials) { result in
+            switch result {
+            case .success(let token):
+                self.userDefaults.set(token, forKey: "token")
+                self.isPresented?.value = false
+            case .failure:
+                break
+            }
+        }
     }
 }
 
