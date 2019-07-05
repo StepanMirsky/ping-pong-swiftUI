@@ -12,7 +12,7 @@ struct GamesView : View {
     let gameService: GameService = GameServiceImpl()
 
     var userName: String?
-    @State var games: [Game] = []
+    @State var games: [GameViewModel] = []
     
     var body: some View {
         List(games) { game in

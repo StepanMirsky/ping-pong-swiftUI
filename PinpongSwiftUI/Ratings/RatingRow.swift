@@ -24,7 +24,7 @@ struct LastGamesView : View {
 }
 
 struct RatingRow : View {
-    var user: User
+    var user: UserViewModel
     
     var body: some View {
         HStack {

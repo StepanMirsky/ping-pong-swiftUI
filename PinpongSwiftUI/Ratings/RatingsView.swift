@@ -13,7 +13,7 @@ struct ShortGame: Hashable {
     let isWin: Bool
 }
 
-struct User: Hashable, Identifiable {
+struct UserViewModel: Hashable, Identifiable {
     let id = UUID()
     let name: String
     let rating: Int
@@ -22,7 +22,7 @@ struct User: Hashable, Identifiable {
 }
 
 struct RatingsList: View {
-    var users: [User]
+    var users: [UserViewModel]
     
     var body: some View {
         List(users) { user in
@@ -37,7 +37,7 @@ struct RatingsList: View {
 struct RatingsView : View {
     let userService: UserService = UserServiceImpl()
 
-    @State var users: [User] = []
+    @State var users: [UserViewModel] = []
     
     var body: some View {
         RatingsList(users: users)

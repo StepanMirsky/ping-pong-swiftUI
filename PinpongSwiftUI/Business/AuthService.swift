@@ -6,7 +6,7 @@
 //  Copyright © 2019 Лесников Александр Максимович. All rights reserved.
 //
 
-import UIKit
+import Moya
 
 struct Credentials {
     let login: String
@@ -14,7 +14,7 @@ struct Credentials {
 }
 
 protocol AuthService {
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<String>)
+    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>)
 
     func login(_ credentials: Credentials, result: @escaping ResultClosure<String>)
 }
@@ -22,20 +22,26 @@ protocol AuthService {
 class AuthServiceImpl: AuthService {
     let storage = Storage.shared
 
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<String>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            self.storage.users.append(User(name: credentials.login, rating: 1000, image: UIImage(named: "defaultImage")!, lastGames: []))
-            result(.success(credentials.login))
+    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>) {
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.createUser(credentials)) { result in
+            switch result {
+            case .success(let responce):
+                let someObj: DecodableObj = FastDecoder.decode(responce.data)
+            //do something
+            default:
+                break
+            }
         }
     }
 
     func login(_ credentials: Credentials, result: @escaping ResultClosure<String>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            if self.storage.users.lazy.filter({ $0.name == credentials.login }).isEmpty {
-                result(.failure(.textualError("Неправильный логин или пароль")))
-            } else {
-                result(.success(credentials.login))
-            }
-        }
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+//            if self.storage.users.lazy.filter({ $0.name == credentials.login }).isEmpty {
+//                result(.failure(.textualError("Неправильный логин или пароль")))
+//            } else {
+//                result(.success(credentials.login))
+//            }
+//        }
     }
 }

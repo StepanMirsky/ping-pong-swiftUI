@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HistoryRow: View {
-    let game: Game
+    let game: GameViewModel
     var body: some View {
         ZStack {
             HStack() {

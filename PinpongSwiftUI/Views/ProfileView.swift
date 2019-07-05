@@ -11,7 +11,7 @@ import SwiftUI
 struct ProfileView : View {
     let userDefaults = UserDefaults.standard
 
-    var user: User = User(
+    var user: UserViewModel = UserViewModel(
         name: "Sergey",
         rating: 1000,
         image: UIImage(named: "defaultImage")!,

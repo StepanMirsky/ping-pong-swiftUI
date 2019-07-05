@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-struct Game: Identifiable {
+struct GameViewModel: Identifiable {
     let id = UUID()
-    let homeUser: User
-    let awayUser: User
+    let homeUser: UserViewModel
+    let awayUser: UserViewModel
     var homeScore: UInt
     var awayScore: UInt
     var isFinished: Bool
@@ -24,7 +24,7 @@ struct Game: Identifiable {
 }
 
 struct PlayerView : View {
-    let user: User
+    let user: UserViewModel
     let textAlignment: HorizontalAlignment
 
     var body: some View {
@@ -71,8 +71,8 @@ struct GameView : View {
     let gameService: GameService = GameServiceImpl()
     let userService: UserService = UserServiceImpl()
 
-    @State var game: Game!
-    var awayUser: User?
+    @State var game: GameViewModel!
+    var awayUser: UserViewModel?
 
     var body: some View {
         VStack {
@@ -129,7 +129,7 @@ struct GameView : View {
         userService.getCurrentUser { result in
             switch result {
             case .success(let homeUser):
-                let game = Game(
+                let game = GameViewModel(
                     homeUser: homeUser,
                     awayUser: awayUser,
                     homeScore: 0,
@@ -173,9 +173,9 @@ struct GameView : View {
 #if DEBUG
 struct GameView_Previews : PreviewProvider {
     static var previews: some View {
-        let homeUser = User(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!, lastGames: [])
-        let awayUser = User(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!, lastGames: [])
-        return GameView(game: Game(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11, isFinished: true))
+        let homeUser = UserViewModel(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!, lastGames: [])
+        let awayUser = UserViewModel(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!, lastGames: [])
+        return GameView(game: GameViewModel(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11, isFinished: true))
     }
 }
 #endif

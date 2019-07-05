@@ -11,12 +11,12 @@ import UIKit
 class Storage {
     static let shared = Storage()
 
-    var users: [User] = []
-    var games: [Game] = []
+    var users: [UserViewModel] = []
+    var games: [GameViewModel] = []
 
     init() {
         users = [
-            User(
+            UserViewModel(
                 name: "Серега",
                 rating: 500,
                 image: UIImage(named: "defaultImage")!,
@@ -26,7 +26,7 @@ class Storage {
                     ShortGame(isWin: false)
                 ]
             ),
-            User(
+            UserViewModel(
                 name: "Федя",
                 rating: 1000,
                 image: UIImage(named: "personOne")!,
@@ -38,7 +38,7 @@ class Storage {
                     ShortGame(isWin: true)
                 ]
             ),
-            User(
+            UserViewModel(
                 name: "Антон",
                 rating: 1500,
                 image: UIImage(named: "defaultImage")!,
@@ -49,7 +49,7 @@ class Storage {
                     ShortGame(isWin: true)
                 ]
             ),
-            User(
+            UserViewModel(
                 name: "Вика",
                 rating: 800,
                 image: UIImage(named: "personTwo")!,
@@ -57,7 +57,7 @@ class Storage {
                     ShortGame(isWin: true),
                     ShortGame(isWin: false)            ]
             ),
-            User(
+            UserViewModel(
                 name: "Гриша",
                 rating: 450,
                 image: UIImage(named: "defaultImage")!,
@@ -66,35 +66,35 @@ class Storage {
         ]
 
         games = [
-            Game(
+            GameViewModel(
                 homeUser: users[0],
                 awayUser: users[1],
                 homeScore: 5,
                 awayScore: 3,
                 isFinished: false
             ),
-            Game(
+            GameViewModel(
                 homeUser: users[1],
                 awayUser: users[2],
                 homeScore: 11,
                 awayScore: 3,
                 isFinished: true
             ),
-            Game(
+            GameViewModel(
                 homeUser: users[2],
                 awayUser: users[3],
                 homeScore: 5,
                 awayScore: 11,
                 isFinished: true
             ),
-            Game(
+            GameViewModel(
                 homeUser: users[2],
                 awayUser: users[0],
                 homeScore: 11,
                 awayScore: 7,
                 isFinished: true
             ),
-            Game(
+            GameViewModel(
                 homeUser: users[3],
                 awayUser: users[1],
                 homeScore: 15,
