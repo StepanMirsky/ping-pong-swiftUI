@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Moya
 
 enum APIError: Error {
     case textualError(String)

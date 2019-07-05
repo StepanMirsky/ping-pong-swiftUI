@@ -14,8 +14,14 @@ import Foundation
 import Moya
 
 enum PinpongRequest {
-    case games
-    case showUser(id: Int)
+    case auth(login: String, password: String)
+    case getGames
+    case getGame(id: Int)
+    case updateGame(id: Int)
+    case createGame
+    case getUser(id: Int)
+    case getUsers
+    case createUser
 }
 
 extension PinpongRequest: TargetType {
@@ -26,25 +32,36 @@ extension PinpongRequest: TargetType {
     
     var path: String {
         switch self {
-        case .games:
+        case .auth:
+            return "/users/sign_in"
+        case .getGames:
             return "/games"
-        case .showUser(let id):
+        case .createGame:
+            return "/games/create"
+        case .getGame(let id), .updateGame(let id):
+            return "/gemes\(id)"
+        case .getUser(let id):
             return "/users/\(id)"
+        case .createUser:
+            return "/users/registration"
+        case .getUsers:
+            return "/users"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .games, .showUser:
+        case .getGames, .getGame(_), .getUser(_), .getUsers:
             return .get
+        case .createGame, .createUser, .auth(_, _):
+            return .post
+        case .updateGame(_):
+            return .put
         }
     }
     
     var task: Task {
-        switch self {
-        case .games, .showUser:
-            return .requestPlain
-        }
+        return .requestPlain // Поправить
     }
     
     var sampleData: Data {
