@@ -10,8 +10,6 @@ import SwiftUI
 import UIKit
 
 struct ProfileView : View {
-//    let userDefaults = UserDefaults.standard
-
     let userService: UserService = UserServiceImpl()
     let coordinator1 = Coordinator1()
     @State var hide: Bool = false
@@ -70,8 +68,7 @@ struct ProfileView : View {
                         Text("Посмотреть все игры")
                             .font(.system(.headline, design: .rounded))
                     }
-                } else  {
-//
+                } else {
                     PresentationLink(destination: LoginView() ) {
                         Text("Войти или зарегистрироваться")
                             .font(.system(.headline, design: .rounded))
@@ -80,10 +77,13 @@ struct ProfileView : View {
             }
             .onAppear {
                 self.coordinator1.successImagePicked = { image in
-//                    self.imagePicker.dismissed = true
                     self.hide = true
                     self.user.image = image
                 }
+                self.coordinator1.cancellPicker = {
+                     self.hide = true
+                }
+                
                 if self.user == nil {
                     self.userService.getCurrentUser { (result) in
                         switch result {
@@ -102,9 +102,10 @@ struct ProfileView : View {
 
 class Coordinator1: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var successImagePicked: ((UIImage) -> Void)?
+    var cancellPicker: (()-> Void)?
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        print("cancell")
+        cancellPicker?()
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
