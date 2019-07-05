@@ -21,7 +21,7 @@ struct ProfileView : View {
     
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             
             VStack(alignment: .center, spacing: 20) {
                 if (isAuthorized || !isMe) && user != nil {
