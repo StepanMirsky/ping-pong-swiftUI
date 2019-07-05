@@ -45,8 +45,8 @@ class UserServiceImpl: UserService {
         provider.request(.myProfile) { requestResult in
             switch requestResult {
             case .success(let responce):
-                if let userDataResponse: UserDataResponse = try? JSONDecoder().decode(UserDataResponse.self, from: responce.data) {
-                    result(.success(UserViewModel(from: userDataResponse.data)))
+                if let user: User = try? JSONDecoder().decode(User.self, from: responce.data) {
+                    result(.success(UserViewModel(from: user)))
                 }
                 
                 if let error: ErrorModel = try? JSONDecoder().decode(

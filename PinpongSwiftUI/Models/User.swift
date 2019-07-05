@@ -8,10 +8,6 @@
 
 import Foundation
 
-struct UserDataResponse: Decodable {
-    let data: User
-}
-
 struct User: Decodable {
     let id: Int
     let login: String
