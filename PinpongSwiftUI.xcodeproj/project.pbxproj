@@ -22,6 +22,7 @@
 		54D2E13322CE87850067EB5E /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13222CE87850067EB5E /* UserService.swift */; };
 		54D2E13522CE87960067EB5E /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13422CE87960067EB5E /* GameService.swift */; };
 		54D2E13722CE88520067EB5E /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D2E13622CE88520067EB5E /* AuthService.swift */; };
+		64FD55E922CF66BE009EBB62 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FD55E822CF66BE009EBB62 /* ImagePicker.swift */; };
 		6A114CF822CDE54100DE4E5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF722CDE54100DE4E5D /* AppDelegate.swift */; };
 		6A114CFA22CDE54100DE4E5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */; };
 		6A114CFE22CDE54100DE4E5D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A114CFD22CDE54100DE4E5D /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 		54D2E13222CE87850067EB5E /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		54D2E13422CE87960067EB5E /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 		54D2E13622CE88520067EB5E /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		64FD55E822CF66BE009EBB62 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		6A114CF422CDE54100DE4E5D /* PinpongSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PinpongSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A114CF722CDE54100DE4E5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A114CF922CDE54100DE4E5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				6A114D0222CDE54100DE4E5D /* LaunchScreen.storyboard */,
 				6A114D0522CDE54100DE4E5D /* Info.plist */,
 				6A114CFF22CDE54100DE4E5D /* Preview Content */,
+				64FD55E822CF66BE009EBB62 /* ImagePicker.swift */,
 			);
 			path = PinpongSwiftUI;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				28A0866422CF4B6A005EBFB8 /* Game.swift in Sources */,
 				54D2E13722CE88520067EB5E /* AuthService.swift in Sources */,
 				6A5D660222CF24D0001EDD64 /* Date+Formatter.swift in Sources */,
+				64FD55E922CF66BE009EBB62 /* ImagePicker.swift in Sources */,
 				6A5D65FE22CF1CD6001EDD64 /* PinpongApi.swift in Sources */,
 				28A0866222CF4ABF005EBFB8 /* User.swift in Sources */,
 			);
