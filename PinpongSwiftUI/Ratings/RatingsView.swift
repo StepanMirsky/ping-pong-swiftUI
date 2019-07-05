@@ -17,7 +17,7 @@ struct UserViewModel: Hashable, Identifiable {
     let id = UUID()
     let name: String
     let rating: Int
-    let image: UIImage
+    var image: UIImage
     let lastGames: [ShortGame]
     
     init(name: String, rating: Int, image: UIImage, lastGames: [ShortGame]) {

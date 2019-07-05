@@ -14,7 +14,7 @@ protocol GameService {
 
     func getGames(by userName: String, result: @escaping ResultClosure<[GameViewModel]>)
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>)
 
     func updateGame(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
 }
@@ -34,13 +34,6 @@ class GameServiceImpl: GameService {
                 if let games: [Game] = try? decoder.decode([Game].self, from: responce.data) {
                     result(.success(games.map({ GameViewModel(game: $0) })))
                 }
-
-                if let error: ErrorModel = try? decoder.decode(
-                    ErrorModel.self,
-                    from: responce.data) {
-                    result(.failure(.textualError(error.errors.detail)))
-                }
-                
             default:
                 break
             }
@@ -53,20 +46,34 @@ class GameServiceImpl: GameService {
         }
     }
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            self.storage.games.append(game)
-            result(.success(game))
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>) {
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.createGame(awayUserName: awayUserName)) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
+                    result(.success(GameViewModel(game: game)))
+                }
+            default:
+                break
+            }
         }
     }
 
     func updateGame(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-            if let index = self.storage.games.firstIndex(where: { $0.id == game.id }) {
-                self.storage.games[index] = game
-                result(.success(game))
-            } else {
-                result(.failure(.textualError("Игра не найдена")))
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.updateGame(params: UpdateGameParams(id: game.gameId, homeScore: Int(game.homeScore), awayScore: Int(game.awayScore)))) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
+                    result(.success(GameViewModel(game: game)))
+                }
+            default:
+                break
             }
         }
     }
