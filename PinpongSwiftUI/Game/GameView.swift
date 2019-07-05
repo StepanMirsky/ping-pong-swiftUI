@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GameViewModel: Identifiable {
     let id = UUID()
+    let gameId: Int
     let homeUser: UserViewModel
     let awayUser: UserViewModel
     var homeScore: UInt
@@ -20,6 +21,31 @@ struct GameViewModel: Identifiable {
     }
     var awayIsWinner: Bool {
         return !homeIsWinner
+    }
+
+    init(gameId: Int,
+        homeUser: UserViewModel,
+        awayUser: UserViewModel,
+        homeScore: UInt,
+        awayScore: UInt,
+        isFinished: Bool) {
+        self.gameId = gameId
+        self.homeUser = homeUser
+        self.awayUser = awayUser
+        self.homeScore = homeScore
+        self.awayScore = awayScore
+        self.isFinished = isFinished
+    }
+}
+
+extension GameViewModel {
+    init(game: Game) {
+        self.gameId = game.id
+        self.homeUser = UserViewModel(from: game.homeUser)
+        self.homeScore = UInt(game.homeScore)
+        self.awayUser = UserViewModel(from: game.awayUser)
+        self.awayScore = UInt(game.awayScore)
+        self.isFinished = false
     }
 }
 
@@ -133,30 +159,16 @@ struct GameView : View {
             return
         }
 
-        userService.getCurrentUser { result in
+        gameService.create(awayUser.name) { result in
             switch result {
-            case .success(let homeUser):
-                let game = GameViewModel(
-                    homeUser: homeUser,
-                    awayUser: awayUser,
-                    homeScore: 0,
-                    awayScore: 0,
-                    isFinished: false
-                )
-                self.gameService.create(game) { result in
-                    switch result {
-                    case .success(let game):
-                        self.game = game
-                    case .failure:
-                        break
-                    }
-                }
+            case .success(let game):
+                self.game = game
             case .failure:
                 break
             }
         }
     }
-    
+
     func addScore(to isHome: Bool) {
         if isHome {
             game.homeScore += 1
@@ -176,13 +188,3 @@ struct GameView : View {
         }
     }
 }
-
-#if DEBUG
-struct GameView_Previews : PreviewProvider {
-    static var previews: some View {
-        let homeUser = UserViewModel(name: "Home", rating: 400, image: UIImage(named: "defaultImage")!, lastGames: [])
-        let awayUser = UserViewModel(name: "Away", rating: 600, image: UIImage(named: "defaultImage")!, lastGames: [])
-        return GameView(game: GameViewModel(homeUser: homeUser, awayUser: awayUser, homeScore: 7, awayScore: 11, isFinished: true))
-    }
-}
-#endif

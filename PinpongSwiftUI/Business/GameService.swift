@@ -14,7 +14,7 @@ protocol GameService {
 
     func getGames(by userName: String, result: @escaping ResultClosure<[GameViewModel]>)
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>)
 
     func updateGame(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>)
 }
@@ -24,15 +24,16 @@ class GameServiceImpl: GameService {
     let userDefaults = UserDefaults.standard
 
     func getGames(_ result: @escaping ResultClosure<[GameViewModel]>) {
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-//            result(.success(self.storage.games))
-//        }
         let provider = MoyaProvider<PinpongRequest>()
-        provider.request(.getGames) { result in
-            switch result {
+        provider.request(.getGames) { requestResult in
+            switch requestResult {
             case .success(let responce):
-                let someObj: DecodableObj = FastDecoder.decode(responce.data)
-            //do something
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                if let games: [Game] = try? decoder.decode([Game].self, from: responce.data) {
+                    result(.success(games.map({ GameViewModel(game: $0) })))
+                }
             default:
                 break
             }
@@ -45,10 +46,19 @@ class GameServiceImpl: GameService {
         }
     }
 
-    func create(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            self.storage.games.append(game)
-            result(.success(game))
+    func create(_ awayUserName: String, result: @escaping ResultClosure<GameViewModel>) {
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.createGame(awayUserName: awayUserName)) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
+                    result(.success(GameViewModel(game: game)))
+                }
+            default:
+                break
+            }
         }
     }
 

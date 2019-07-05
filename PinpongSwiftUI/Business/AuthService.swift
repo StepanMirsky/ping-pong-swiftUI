@@ -32,6 +32,7 @@ class AuthServiceImpl: AuthService {
                 let user: User = FastDecoder.decode(response.data)
                 self.userDefaults.set(user.id, forKey: "id")
                 self.userDefaults.set(user.login, forKey: "login")
+                self.saveAuthCookies()
                 onResult(.success(user.id))
             default:
                 break
@@ -47,10 +48,18 @@ class AuthServiceImpl: AuthService {
                 let user: User = FastDecoder.decode(response.data)
                 self.userDefaults.set(user.id, forKey: "id")
                 self.userDefaults.set(user.login, forKey: "login")
+                self.saveAuthCookies()
                 onResult(.success(user.id))
             default:
                 break
             }
         }
+    }
+    
+    private func saveAuthCookies() {
+        guard let cookies = HTTPCookieStorage.shared.cookies else { return }
+        
+        let cookiesString = cookies.compactMap { "\($0.name)=\($0.value)"}
+        userDefaults.set(cookiesString.joined(separator: ";"), forKey: "cookie")
     }
 }
