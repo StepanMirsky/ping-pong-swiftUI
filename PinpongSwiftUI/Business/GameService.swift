@@ -28,8 +28,6 @@ class GameServiceImpl: GameService {
         provider.request(.getGames) { requestResult in
             switch requestResult {
             case .success(let responce):
-                print(String(data: responce.data, encoding: .utf8))
-
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
 
