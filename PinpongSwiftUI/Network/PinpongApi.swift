@@ -6,7 +6,10 @@
 //  Copyright © 2019 Лесников Александр Максимович. All rights reserved.
 //
 
+//=======>>>>>
 //Examples https://github.com/Moya/Moya/blob/master/docs/Examples/Basic.md
+//=======<<<<<
+
 import Foundation
 import Moya
 
