@@ -12,6 +12,8 @@ struct LoginView : View {
     let authService: AuthService = AuthServiceImpl()
     let userDefaults = UserDefaults.standard
 
+    @Environment(\.isPresented) var isPresented: Binding<Bool>?
+
     @State var login: String = ""
     @State var password: String = ""
     @State var error: Error?
@@ -58,7 +60,7 @@ struct LoginView : View {
             switch result {
             case .success(let token):
                 self.userDefaults.set(token, forKey: "token")
-                //TODO: Как закрыть жкран???
+                self.isPresented?.value = false
             case .failure(let error):
                 self.error = error
             }

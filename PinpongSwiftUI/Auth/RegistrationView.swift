@@ -18,6 +18,8 @@ struct RegistrationView : View {
         case notReady
     }
 
+    @Environment(\.isPresented) var isPresented: Binding<Bool>?
+
     @State var login: String = ""
     @State var password: String = ""
     @State var passwordConfirm: String = ""
@@ -73,7 +75,7 @@ struct RegistrationView : View {
             switch result {
             case .success(let token):
                 self.userDefaults.set(token, forKey: "token")
-            //TODO: Как закрыть жкран???
+                self.isPresented?.value = false
             case .failure:
                 break
             }
