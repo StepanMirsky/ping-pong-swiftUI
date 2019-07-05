@@ -45,7 +45,7 @@ extension GameViewModel {
         self.homeScore = UInt(game.homeScore)
         self.awayUser = UserViewModel(from: game.awayUser)
         self.awayScore = UInt(game.awayScore)
-        self.isFinished = false
+        self.isFinished = game.isFinished
     }
 }
 
@@ -176,15 +176,30 @@ struct GameView : View {
             game.awayScore += 1
         }
         endGameIfNeeded()
-        gameService.updateGame(game) { _ in }
     }
 
     func endGameIfNeeded() {
         if game.homeScore >= 11 && game.homeScore > game.awayScore && game.homeScore - game.awayScore >= 2 {
             game.isFinished = true
+            gameService.updateGame(game) { result in
+                switch result {
+                case .success(let game):
+                    self.game = game
+                case .failure:
+                    break
+                }
+            }
         }
         if game.awayScore >= 11 && game.awayScore > game.homeScore && game.awayScore - game.homeScore >= 2 {
             game.isFinished = true
+            gameService.updateGame(game) { result in
+                switch result {
+                case .success(let game):
+                    self.game = game
+                case .failure:
+                    break
+                }
+            }
         }
     }
 }

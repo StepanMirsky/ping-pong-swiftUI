@@ -63,12 +63,17 @@ class GameServiceImpl: GameService {
     }
 
     func updateGame(_ game: GameViewModel, result: @escaping ResultClosure<GameViewModel>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.5) {
-            if let index = self.storage.games.firstIndex(where: { $0.id == game.id }) {
-                self.storage.games[index] = game
-                result(.success(game))
-            } else {
-                result(.failure(.textualError("Игра не найдена")))
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.updateGame(params: UpdateGameParams(id: game.gameId, homeScore: Int(game.homeScore), awayScore: Int(game.awayScore)))) { requestResult in
+            switch requestResult {
+            case .success(let responce):
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                if let game: Game = try? decoder.decode(Game.self, from: responce.data) {
+                    result(.success(GameViewModel(game: game)))
+                }
+            default:
+                break
             }
         }
     }
