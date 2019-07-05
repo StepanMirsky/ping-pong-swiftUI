@@ -85,6 +85,7 @@
 		2831E1C722CDFA3700CB7415 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				64FD55E822CF66BE009EBB62 /* ImagePicker.swift */,
 				2831E1C922CDFA3700CB7415 /* ProfileView.swift */,
 			);
 			path = Profile;
@@ -187,7 +188,6 @@
 				6A114D0222CDE54100DE4E5D /* LaunchScreen.storyboard */,
 				6A114D0522CDE54100DE4E5D /* Info.plist */,
 				6A114CFF22CDE54100DE4E5D /* Preview Content */,
-				64FD55E822CF66BE009EBB62 /* ImagePicker.swift */,
 			);
 			path = PinpongSwiftUI;
 			sourceTree = "<group>";
