@@ -66,13 +66,15 @@ struct ProfileView : View {
                 }
             }
             .onAppear {
-                self.userService.getCurrentUser { (result) in
-                    switch result {
-                    case .success(let user):
-                        self.user = user
-                    case .failure(let error):
-                        self.errorMessage = error.localizedDescription
-                        self.showingAlert = true
+                if self.user == nil {
+                    self.userService.getCurrentUser { (result) in
+                        switch result {
+                        case .success(let user):
+                            self.user = user
+                        case .failure(let error):
+                            self.errorMessage = error.localizedDescription
+                            self.showingAlert = true
+                        }
                     }
                 }
             }

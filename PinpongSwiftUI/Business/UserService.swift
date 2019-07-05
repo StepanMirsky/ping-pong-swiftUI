@@ -34,9 +34,23 @@ class UserServiceImpl: UserService {
     let userDefaults = UserDefaults.standard
 
     func getUsers(_ result: @escaping ResultClosure<[UserViewModel]>) {
-        
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            result(.success(self.storage.users))
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.getUsers) { requestResult in
+            switch requestResult {
+            case .success(let response):
+                if let users: [User] = try? JSONDecoder().decode([User].self, from: response.data) {
+                    let userViewModels = users.compactMap { UserViewModel(from: $0) }
+                    result(.success(userViewModels))
+                }
+                
+                if let error: ErrorModel = try? JSONDecoder().decode(
+                    ErrorModel.self,
+                    from: response.data) {
+                    result(.failure(.textualError(error.errors.detail)))
+                }
+            case .failure(let error):
+                result(.failure(.textualError(error.errorDescription ?? "")))
+            }
         }
     }
 
