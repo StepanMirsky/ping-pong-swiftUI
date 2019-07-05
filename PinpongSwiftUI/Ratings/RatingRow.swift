@@ -14,12 +14,10 @@ struct LastGamesView : View {
     var body: some View {
         HStack() {
             ForEach(lastGames.identified(by: \.id)) { game in
-//                Image(uiImage: UIImage.from(color: game.isWin ? .green : .red))
                 Image(uiImage: UIImage(named: game.isWin ? "win" : "loose")!)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 15, height: 15)
-//                    .cornerRadius(2.0)
             }
         }
     }
@@ -27,6 +25,10 @@ struct LastGamesView : View {
 
 struct RatingRow : View {
     var user: UserViewModel
+    var currentLogin: String? {
+        guard let login = UserDefaults.standard.value(forKey: "login") as? String else { return nil }
+        return login
+    }
     
     var body: some View {
         HStack {
@@ -39,7 +41,7 @@ struct RatingRow : View {
                 .shadow(radius: 10)
             VStack(alignment: .leading) {
                 HStack {
-                    Text(user.name)
+                    Text((user.name == currentLogin) ? (user.name + " ✔︎") : user.name)
                         .color(.black)
                         .font(Font.system(.headline, design: .rounded))
                     LastGamesView(lastGames: user.lastGames)
@@ -54,7 +56,7 @@ struct RatingRow : View {
 
 extension Color {
     static func ratingColor(_ ratingValue: Int) -> Color {
-        return (ratingValue > 1000) ? .green : (ratingValue < 500 ? .red : .gray)
+        return (ratingValue > 1000) ? .green : (ratingValue < 950 ? .red : .gray)
     }
 }
 
