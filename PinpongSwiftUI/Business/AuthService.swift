@@ -6,6 +6,7 @@
 //  Copyright © 2019 Лесников Александр Максимович. All rights reserved.
 //
 
+import Foundation
 import Moya
 
 struct Credentials {
@@ -13,35 +14,44 @@ struct Credentials {
     let password: String
 }
 
-protocol AuthService {
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>)
+struct AuthResponse<T: Decodable>: Decodable {
+    let data: T
+}
 
-    func login(_ credentials: Credentials, result: @escaping ResultClosure<String>)
+protocol AuthService {
+    func register(_ credentials: Credentials, onResult: @escaping ResultClosure<Int>)
+
+    func login(_ credentials: Credentials, onResult: @escaping ResultClosure<Int>)
 }
 
 class AuthServiceImpl: AuthService {
     let storage = Storage.shared
-
-    func register(_ credentials: Credentials, result: @escaping ResultClosure<User>) {
+    let userDefaults = UserDefaults.standard
+    
+    func register(_ credentials: Credentials, onResult: @escaping ResultClosure<Int>) {
         let provider = MoyaProvider<PinpongRequest>()
         provider.request(.createUser(credentials)) { result in
             switch result {
-            case .success(let responce):
-                let someObj: DecodableObj = FastDecoder.decode(responce.data)
-            //do something
+            case .success(_):
+                self.login(credentials, onResult: onResult)
             default:
                 break
             }
         }
-    }
+    }   
 
-    func login(_ credentials: Credentials, result: @escaping ResultClosure<String>) {
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-//            if self.storage.users.lazy.filter({ $0.name == credentials.login }).isEmpty {
-//                result(.failure(.textualError("Неправильный логин или пароль")))
-//            } else {
-//                result(.success(credentials.login))
-//            }
-//        }
+    func login(_ credentials: Credentials, onResult: @escaping ResultClosure<Int>) {
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.auth(credentials)) { result in
+            switch result {
+            case .success(let response):
+                let object: AuthResponse<User> = FastDecoder.decode(response.data)
+                self.userDefaults.set(object.data.id, forKey: "id")
+                self.userDefaults.set(object.data.login, forKey: "login")
+                onResult(.success(object.data.id))
+            default:
+                break
+            }
+        }
     }
 }

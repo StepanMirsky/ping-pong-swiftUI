@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Moya
 
 protocol GameService {
     func getGames(_ result: @escaping ResultClosure<[GameViewModel]>)
@@ -23,8 +24,18 @@ class GameServiceImpl: GameService {
     let userDefaults = UserDefaults.standard
 
     func getGames(_ result: @escaping ResultClosure<[GameViewModel]>) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
-            result(.success(self.storage.games))
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+//            result(.success(self.storage.games))
+//        }
+        let provider = MoyaProvider<PinpongRequest>()
+        provider.request(.getGames) { result in
+            switch result {
+            case .success(let responce):
+                let someObj: DecodableObj = FastDecoder.decode(responce.data)
+            //do something
+            default:
+                break
+            }
         }
     }
 

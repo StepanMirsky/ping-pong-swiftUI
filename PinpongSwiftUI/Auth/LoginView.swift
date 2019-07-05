@@ -62,8 +62,7 @@ struct LoginView : View {
         let credentials = Credentials(login: login, password: password)
         authService.login(credentials) { result in
             switch result {
-            case .success(let token):
-                self.userDefaults.set(token, forKey: "token")
+            case .success(_):
                 self.isPresented?.value = false
             case .failure(let error):
                 self.error = error
