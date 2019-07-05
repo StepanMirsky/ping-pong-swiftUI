@@ -19,7 +19,24 @@ struct UserViewModel: Hashable, Identifiable {
     let rating: Int
     let image: UIImage
     let lastGames: [ShortGame]
+    
+    init(name: String, rating: Int, image: UIImage, lastGames: [ShortGame]) {
+        self.name = name
+        self.rating = rating
+        self.image = image
+        self.lastGames = lastGames
+    }
+    
+    
+    init(from user: User) {
+        self.name = user.login
+        self.rating = user.rating
+        self.image = UIImage(named: "defaultImage")!
+        self.lastGames = []
+    }
 }
+
+
 
 struct RatingsList: View {
     var users: [UserViewModel]

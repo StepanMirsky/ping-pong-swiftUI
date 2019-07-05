@@ -14,6 +14,8 @@ struct ProfileView : View {
     let userService: UserService = UserServiceImpl()
     
     @State var user: UserViewModel!
+    @State var showingAlert: Bool = false
+    @State var errorMessage: String = ""
     
     var isMe: Bool
     
@@ -22,7 +24,6 @@ struct ProfileView : View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            
             VStack(alignment: .center, spacing: 20) {
                 if (isAuthorized || !isMe) && user != nil {
                     if isMe {
@@ -64,15 +65,16 @@ struct ProfileView : View {
                     }
                 }
             }
-                .onAppear {
-                    self.userService.getCurrentUser { (result) in
-                        switch result {
-                        case .success(let user):
-                            self.user = user
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
+            .onAppear {
+                self.userService.getCurrentUser { (result) in
+                    switch result {
+                    case .success(let user):
+                        self.user = user
+                    case .failure(let error):
+                        self.errorMessage = error.localizedDescription
+                        self.showingAlert = true
                     }
+                }
             }
         }
     }

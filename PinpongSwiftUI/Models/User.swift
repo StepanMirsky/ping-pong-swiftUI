@@ -8,7 +8,13 @@
 
 import Foundation
 
-struct User {
+struct UserDataResponse: Decodable {
+    let data: User
+}
+
+struct User: Decodable {
     let id: Int
     let login: String
+    let photo: URL?
+    let rating: Int
 }
