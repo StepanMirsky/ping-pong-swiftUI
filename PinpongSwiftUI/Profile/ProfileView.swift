@@ -19,7 +19,7 @@ struct ProfileView : View {
     
     var isMe: Bool
     
-    @State var isAuthorized: Bool = UserDefaults.standard.string(forKey: "id") != nil
+    @State var isAuthorized: Bool = UserDefaults.standard.string(forKey: "cookie") != nil
     
     
     var body: some View {

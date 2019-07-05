@@ -85,6 +85,10 @@ extension PinpongRequest: TargetType {
     }
     
     var headers: [String: String]? {
-        return ["Content-type": "application/json"]
+        guard let cookieString = UserDefaults.standard.value(forKey: "cookie") as? String else {
+            return ["Content-type": "application/json"]
+        }
+        
+        return ["Content-type": "application/json", "Cookie": cookieString]
     }
 }
