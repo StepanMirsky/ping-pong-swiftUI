@@ -40,11 +40,15 @@ struct UserViewModel: Hashable, Identifiable {
 
 struct RatingsList: View {
     var users: [UserViewModel]
+    var currentLogin: String? {
+        guard let login = UserDefaults.standard.value(forKey: "login") as? String else { return nil }
+        return login
+    }
     
     var body: some View {
         List(users) { user in
             NavigationLink(
-                destination: ProfileView(user: user, isMe: false)) {
+            destination: ProfileView(user: user, isMe: user.name == self.currentLogin)) {
                 RatingRow(user: user)
             }
         }.listStyle(.grouped)

@@ -72,6 +72,20 @@ struct ProfileView : View {
                     PresentationLink(destination: LoginView() ) {
                         Text("Войти или зарегистрироваться")
                             .font(.system(.headline, design: .rounded))
+                            .navigationBarItems(
+                                trailing: Button("Обновить") {
+                                    self.userService.getCurrentUser { (result) in
+                                        switch result {
+                                        case .success(let user):
+                                            self.user = user
+                                        case .failure(let error):
+                                            self.errorMessage = error.localizedDescription
+                                            self.showingAlert = true
+                                        }
+                                        self.isAuthorized = UserDefaults.standard.string(forKey: "cookie") != nil
+                                    }
+                                }
+                        ).navigationBarTitle(Text("Профиль"))
                     }
                 }
             }
@@ -89,10 +103,12 @@ struct ProfileView : View {
                         switch result {
                         case .success(let user):
                             self.user = user
+
                         case .failure(let error):
                             self.errorMessage = error.localizedDescription
                             self.showingAlert = true
                         }
+                        self.isAuthorized = UserDefaults.standard.string(forKey: "cookie") != nil
                     }
                 }
             }
