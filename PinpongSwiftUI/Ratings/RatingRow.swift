@@ -53,7 +53,7 @@ struct RatingRow : View {
 }
 
 extension Color {
-    static func ratingColor(_ ratingValue: Int) -> Color {
+    static func ratingColor(_ ratingValue: Double) -> Color {
         return (ratingValue > 1000) ? .green : (ratingValue < 500 ? .red : .gray)
     }
 }

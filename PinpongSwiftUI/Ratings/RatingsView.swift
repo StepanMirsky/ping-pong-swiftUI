@@ -16,11 +16,11 @@ struct ShortGame: Hashable {
 struct UserViewModel: Hashable, Identifiable {
     let id = UUID()
     let name: String
-    let rating: Int
+    let rating: Double
     var image: UIImage
     let lastGames: [ShortGame]
     
-    init(name: String, rating: Int, image: UIImage, lastGames: [ShortGame]) {
+    init(name: String, rating: Double, image: UIImage, lastGames: [ShortGame]) {
         self.name = name
         self.rating = rating
         self.image = image

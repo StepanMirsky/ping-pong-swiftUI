@@ -12,5 +12,5 @@ struct User: Decodable {
     let id: Int
     let login: String
     let photo: URL?
-    let rating: Int
+    let rating: Double
 }
