@@ -53,7 +53,7 @@ struct ProfileView : View {
                     }
                     Text(user.name)
                         .font(Font.system(.largeTitle, design: .rounded))
-                    Text("\(user.rating)")
+                    Text("\(Int(user.rating))")
                         .color(Color.ratingColor(user.rating))
                         .font(Font.system(.headline, design: .rounded))
                     LastGamesView(lastGames: user.lastGames)

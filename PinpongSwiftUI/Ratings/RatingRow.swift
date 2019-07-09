@@ -46,7 +46,7 @@ struct RatingRow : View {
                         .font(Font.system(.headline, design: .rounded))
                     LastGamesView(lastGames: user.lastGames)
                 }
-                Text(String(user.rating))
+                Text(String(Int(user.rating)))
                     .color(.ratingColor(user.rating))
                     .font(Font.system(.subheadline, design: .rounded))
             }

@@ -62,7 +62,7 @@ struct PlayerView : View {
                 .clipShape(Circle())
             Text(user.name)
                     .font(.system(.title, design: .rounded))
-            Text(String(user.rating))
+            Text(String(Int(user.rating)))
                 .font(.system(.headline, design: .rounded))
                 .color(.ratingColor(user.rating))
         }

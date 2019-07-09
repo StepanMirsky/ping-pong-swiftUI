@@ -28,7 +28,7 @@ struct GamesProfileView: View {
                 .shadow(radius: 10)
             Text("\(user.name)")
                 .font(.headline)
-            Text("Рейтинг: \(user.rating)")
+            Text("Рейтинг: \(Int(user.rating))")
                 .font(.subheadline)
                 .color(.gray)
         }
